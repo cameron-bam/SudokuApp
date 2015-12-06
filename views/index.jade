@@ -1,0 +1,6 @@
+extends layout
+
+block content
+	main(ng-controller="WelcomePageController as welcome")
+		p Welcome to the Sudoku App!
+		p {{ welcome.puzzleMessage }}

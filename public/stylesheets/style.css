@@ -1,0 +1,78 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+table, tr, tbody, td, col {
+	border: 0px none;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	margin: 0px;
+	padding: 0px;
+}
+
+table.sudoku-board {
+	width: 473px;
+	height: 473px;
+
+}
+
+td.sudoku-region {
+	border: 2px solid;
+}
+
+table.sudoku-region{
+	width: 100%;
+	height: 100%;
+}
+
+td.sudoku-box {
+	border: 1px dashed;
+	text-align: center;
+}
+
+td.sudoku-box:hover {
+	background-color: rgb(200, 200, 200);
+}
+
+td.sudoku-box.left {
+	border-left: 0px none;
+	width: 33.333333%;
+}
+
+td.sudoku-box.right {
+	border-right: 0px none;
+	width: 33.333333%;
+}
+
+td.sudoku-box.top {
+	border-top: 0px none;
+	height: 33.333333%;
+}
+
+td.sudoku-box.bottom {
+	border-bottom: 0px none;
+	height: 33.333333%;
+}
+
+
+
+/*
+td.sudoku-box.top
+
+td.sudoku-box.bottom {
+	border-bottom: 0px none;
+}
+
+td.sudoku-box.left {
+	border-left: 0px none;
+}
+
+td.sudoku-box.right {
+	border-right: 0px none;
+}
+*/

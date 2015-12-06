@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	main
+		table(class="sudoku-board" ng-controller="SudokuBoardController as board")
+			tr(ng-repeat = "regRow in [0,1,2]")
+				td(ng-repeat = "regCol in [0,1,2]" class="sudoku-region")
+					table(class="sudoku-region")
+						tr(ng-repeat = "boxRow in [0,1,2]")
+							td(ng-repeat = "boxCol in [0,1,2]" ng-class="board.getBoxClass(boxCol, boxRow)") {{board.getBoxSolution(regCol, regRow, boxCol, boxRow)}}
+

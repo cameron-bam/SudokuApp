@@ -1,0 +1,19 @@
+<div class="sudoku-region">
+	<table>
+		<tr ng-repeat = "regRow in [1,2,3]">
+			<td ng-repeat = "regCol in [1,2,3]">
+				<div class="sudoku-region">
+					<table>
+						<tr ng-repeat="boxRow in [1,2,3]">
+							<td ng-repeat="boxCol in [1,2,3]">
+								<div class="sudoku-box">
+									<input type='text'></input>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table
+</div>

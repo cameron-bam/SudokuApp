@@ -1,0 +1,20 @@
+doctype html
+html(ng-app="SudokuApp")
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		header
+			h1= title
+		nav
+			ul
+				li
+					a(href='/') Home
+				li 
+					a(href='/puzzles') All Puzzles
+				li 
+					a(href='/puzzles/featured') Featured Puzzle
+		block content
+		script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js')
+		script(type='text/javascript', src='/javascripts/app.js')
+		
