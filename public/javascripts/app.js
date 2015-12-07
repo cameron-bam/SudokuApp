@@ -1,6 +1,6 @@
 (function() {
 	
-	var app = angular.module('SudokuApp', [ ]);
+	var app = angular.module('SudokuApp', ['sudokuboard']);
 
 	app.controller('WelcomePageController', function() {
 		
@@ -14,64 +14,10 @@
 			}
 	});
 
-	app.controller('SudokuBoardController', function() {
+	app.controller('SudokuController', function(sudokuBoardFactory) {
 
-		var solutions = [[[[]]]];
-
-		// solutions[0][0][0][0] = 1;
-
-		this.getBoxSolution = function(regionCol, regionRow, boxCol, boxRow) {
-			var sol = null;
-
-			try {
-				sol = solutions[regionCol][regionRow][boxCol][boxRow];
-			}
-			catch(ReferenceError) {
-				sol = '';
-			}
-
-			return sol;
-		};
-
-		this.getBoxClass = function (boxCol, boxRow) {
-			var boxClass = 'sudoku-box ';
-
-			switch(boxCol) {
-				case 0: {
-					boxClass += 'left';
-					break;
-				}
-				case 1: {
-					boxClass += 'center';
-					break;
-				}
-				case 2: {
-					boxClass += 'right';
-					break;
-				}
-			}
-
-			boxClass += ' ';
-
-			switch(boxRow) {
-				case 0: {
-					boxClass += 'top';
-					break;
-				}
-				case 1: {
-					boxClass += 'center';
-					break;
-				}
-				case 2: {
-					boxClass += 'right';
-					break;
-				}
-
-			}
-
-			return boxClass;
-
-		};
+		this.board = sudokuBoardFactory.board;
+		
 	});
 
 })();

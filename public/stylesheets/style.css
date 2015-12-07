@@ -23,6 +23,8 @@ table.sudoku-board {
 
 td.sudoku-region {
 	border: 2px solid;
+	height: 33.333333%;
+	width: 33.333333%;
 }
 
 table.sudoku-region{
@@ -32,7 +34,10 @@ table.sudoku-region{
 
 td.sudoku-box {
 	border: 1px dashed;
+	height: 33.333333%;
+	width: 33.333333%;
 	text-align: center;
+	font-size: 180%;
 }
 
 td.sudoku-box:hover {
@@ -41,22 +46,18 @@ td.sudoku-box:hover {
 
 td.sudoku-box.left {
 	border-left: 0px none;
-	width: 33.333333%;
 }
 
 td.sudoku-box.right {
 	border-right: 0px none;
-	width: 33.333333%;
 }
 
 td.sudoku-box.top {
 	border-top: 0px none;
-	height: 33.333333%;
 }
 
 td.sudoku-box.bottom {
 	border-bottom: 0px none;
-	height: 33.333333%;
 }
 
 

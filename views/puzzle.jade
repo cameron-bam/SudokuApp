@@ -2,10 +2,10 @@ extends layout
 
 block content
 	main
-		table(class="sudoku-board" ng-controller="SudokuBoardController as board")
+		table(class="sudoku-board" ng-controller="SudokuController as sudoku")
 			tr(ng-repeat = "regRow in [0,1,2]")
 				td(ng-repeat = "regCol in [0,1,2]" class="sudoku-region")
 					table(class="sudoku-region")
 						tr(ng-repeat = "boxRow in [0,1,2]")
-							td(ng-repeat = "boxCol in [0,1,2]" ng-class="board.getBoxClass(boxCol, boxRow)") {{board.getBoxSolution(regCol, regRow, boxCol, boxRow)}}
+							td(ng-repeat = "boxCol in [0,1,2]" ng-class="sudoku.board[regCol][regRow][boxCol][boxRow].htmlClass") {{sudoku.board[regCol][regRow][boxCol][boxRow].val}}
 
