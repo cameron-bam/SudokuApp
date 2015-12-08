@@ -7,6 +7,8 @@ block content
 				td(ng-repeat = "regCol in [0,1,2]" class="sudoku-region")
 					table(class="sudoku-region")
 						tr(ng-repeat = "boxRow in [0,1,2]")
+							td(ng-repeat = "boxCol in [0,1,2]" ng-class="sudoku.board[regCol][regRow][boxCol][boxRow].htmlClass" ng-click="sudoku.board.toggleSelector(regCol, regRow, boxCol, boxRow)")
+									div(class="number-picker" ng-show="sudoku.board.isSelectorActive(regCol, regRow, boxCol, boxRow)")
 										div(ng-repeat = "number in ['1','2','3','4','5','6','7','8','9']" ng-class="'number ' + 'value' + number" align="center") 
 											a(href="#") {{number}}
 									div(class="value")
