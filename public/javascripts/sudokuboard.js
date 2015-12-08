@@ -68,6 +68,33 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory', function() {
 
 	var board = make(dim, level);
 
+	board.selectedBox = [];
+
+	board.isSelectorActive = function(regCol, regRow, boxCol, boxRow) {
+	//	console.log('checking if active: ' + regCol + ' ' + regRow + ' ' + boxCol + ' ' + boxRow);
+		if ((this.selectedBox[0] === regCol) 
+		&&  (this.selectedBox[1] === regRow)
+		&& 	(this.selectedBox[2] === boxCol) 
+		&& 	(this.selectedBox[3] === boxRow)) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+	board.toggleSelector = function(regCol, regRow, boxCol, boxRow) {
+		console.log('checking if active: ' + regCol + ' ' + regRow + ' ' + boxCol + ' ' + boxRow);
+		console.log('selectedBox: ' + this.selectedBox);
+		console.log(!!this.selectedBox);
+		if((this.selectedBox.length === 0) || (!this.isSelectorActive(regCol, regRow, boxCol, boxRow))) {
+			console.log([regCol, regRow, boxCol, boxRow]);
+			this.selectedBox = [regCol, regRow, boxCol, boxRow];
+			console.log(this.selectedBox);
+		} else {
+			this.selectedBox = [];
+		}
+	};
+
 	board[0][0][0][0].val = 1;
 	board[0][0][1][1].val = 2;
 	board[0][0][2][2].val = 3;
