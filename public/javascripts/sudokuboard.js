@@ -50,6 +50,10 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory', function() {
 	for (var i = 0; i<dim; i++) {
 		board[i][i].val = i+1;
 	}
+
+	board.setBoxValue = function(boxCol, boxRow, value) {
+		this[boxCol][boxRow].val = value;
+	}
 	
 	return {
 		board: board
