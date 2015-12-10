@@ -1,53 +1,11 @@
 angular.module('sudokuboard', []).factory('sudokuBoardFactory', function() {
 
-	var dim = 3;
-	var level = 4;
-
-	var assignBoxClass = function (boxCol, boxRow) {
-			var boxClass = 'sudoku-box ';
-
-			switch(boxCol) {
-				case 0: {
-					boxClass += 'left';
-					break;
-				}
-				case 1: {
-					boxClass += 'center';
-					break;
-				}
-				case 2: {
-					boxClass += 'right';
-					break;
-				}
-			}
-
-			boxClass += ' ';
-
-			switch(boxRow) {
-				case 0: {
-					boxClass += 'top';
-					break;
-				}
-				case 1: {
-					boxClass += 'center';
-					break;
-				}
-				case 2: {
-					boxClass += 'bottom';
-					break;
-				}
-
-			}
-
-			return boxClass;
-
-	};
+	var dim = 9;
+	var level = 2;
 
 	var make =  function make(dim, lvl, arr, coord) {
 				  if (lvl === 0) {
-				  	var htmlClass = assignBoxClass(coord[2], coord[1]);
-				  	return {htmlClass: htmlClass,
-				  			val: ''};
+				  	return {val: ''};
 				  }
 				  if (!lvl) {
 				  	lvl = dim;
@@ -70,41 +28,29 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory', function() {
 
 	board.selectedBox = [];
 
-	board.isSelectorActive = function(regCol, regRow, boxCol, boxRow) {
+	board.isSelectorActive = function(boxCol, boxRow) {
 	//	console.log('checking if active: ' + regCol + ' ' + regRow + ' ' + boxCol + ' ' + boxRow);
-		if ((this.selectedBox[0] === regCol) 
-		&&  (this.selectedBox[1] === regRow)
-		&& 	(this.selectedBox[2] === boxCol) 
-		&& 	(this.selectedBox[3] === boxRow)) {
+		if ((this.selectedBox[0] === boxCol) 
+		&& 	(this.selectedBox[1] === boxRow)) {
 			return true;
 		} else {
 			return false;
 		}
 	};
 
-	board.toggleSelector = function(regCol, regRow, boxCol, boxRow) {
-		console.log('checking if active: ' + regCol + ' ' + regRow + ' ' + boxCol + ' ' + boxRow);
-		console.log('selectedBox: ' + this.selectedBox);
-		console.log(!!this.selectedBox);
-		if((this.selectedBox.length === 0) || (!this.isSelectorActive(regCol, regRow, boxCol, boxRow))) {
-			console.log([regCol, regRow, boxCol, boxRow]);
-			this.selectedBox = [regCol, regRow, boxCol, boxRow];
-			console.log(this.selectedBox);
+	board.toggleSelector = function(boxCol, boxRow) {
+		if((this.selectedBox.length === 0) || (!this.isSelectorActive(boxCol, boxRow))) 
+		{ 
+			this.selectedBox = [boxCol, boxRow];
 		} else {
 			this.selectedBox = [];
 		}
 	};
 
-	board[0][0][0][0].val = 1;
-	board[0][0][1][1].val = 2;
-	board[0][0][2][2].val = 3;
-	board[1][1][0][0].val = 4;
-	board[1][1][1][1].val = 5;
-	board[1][1][2][2].val = 6;
-	board[2][2][0][0].val = 7;
-	board[2][2][1][1].val = 8;
-	board[2][2][2][2].val = 9;
-
+	for (var i = 0; i<dim; i++) {
+		board[i][i].val = i+1;
+	}
+	
 	return {
 		board: board
 	};

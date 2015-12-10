@@ -7,60 +7,39 @@ a {
   color: #00B7FF;
 }
 
-table, tr, tbody, td, col {
-	border: 0px none;
-	border-spacing: 0px;
+table {
 	border-collapse: collapse;
+	border: 2px solid;
 	margin: 0px;
 	padding: 0px;
-	z-index: 0;
-}
-
-table.sudoku-board {
 	width: 473px;
 	height: 473px;
-
 }
 
-td.sudoku-region {
-	border: 2px solid;
-	height: 33.333333%;
-	width: 33.333333%;
-}
-
-table.sudoku-region{
-	width: 100%;
-	height: 100%;
-}
-
-td.sudoku-box {
+td, tr {
 	border: 1px dashed;
+}
+
+td {
 	position: relative;
-	height: 33.333333%;
-	width: 33.333333%;
-	text-align: center;
 	overflow: visible;
+	text-align: center;
 }
 
-td.sudoku-box.left {
-	border-left: none;
-	border-left-color: transparent;
+
+tr:nth-child(3n){
+	border-bottom:2px solid;
 }
 
-td.sudoku-box.right {
-	border-right: none;
-	border-right-color: transparent;
+td:nth-child(3n+1) {
+	border-left: 2px solid;
 }
 
-td.sudoku-box.top {
-	border-top: none;
-	border-top-color: transparent;
+
+td:hover {
+	background-color: rgb(200, 200, 200);
 }
 
-td.sudoku-box.bottom {
-	border-bottom: none;
-	border-bottom-color: transparent;
-}
 
 div.value {
 	position: static;
@@ -84,53 +63,51 @@ div.number-picker div.number {
 	position: absolute;
 	display: block;
 	height: 1em;
+	width: 1em;
+	line-height: 1em;
 	top: 0;
 	left: 0;
 	bottom: 0;
 	right: 0;
 	margin: auto;
 	z-index: auto;
+	border-radius: 50%;
 }
 
 div.number-picker div.number a{
 	border-radius: 50%;
 	z-index: 100;
 }
-div.number-picker div.number a:hover{
+div.number-picker div.number:hover{
 	background-color: red;
 	font-color: white;
 }
 
-td.sudoku-box:hover {
-	background-color: rgb(200, 200, 200);
-}
-
 div.value1 { 
-	-webkit-transform: rotate(-90deg) translate(50%) rotate(90deg);
-	z-index: 99;
+	-webkit-transform: rotate(-90deg) translate(200%) rotate(90deg);
 }
 
 div.value2 { 
-	-webkit-transform: rotate(-50deg) translate(50%) rotate(50deg); 
+	-webkit-transform: rotate(-50deg) translate(200%) rotate(50deg); 
 }
 div.value3 { 
-	-webkit-transform: rotate(-10deg) translate(50%) rotate(10deg); 
+	-webkit-transform: rotate(-10deg) translate(200%) rotate(10deg); 
 }
 div.value4 { 
-	-webkit-transform: rotate(30deg) translate(50%) rotate(-30deg); 
+	-webkit-transform: rotate(30deg) translate(200%) rotate(-30deg); 
 }
 div.value5 { 
-	-webkit-transform: rotate(70deg) translate(50%) rotate(-70deg);
+	-webkit-transform: rotate(70deg) translate(200%) rotate(-70deg);
 }
 div.value6 { 
-	-webkit-transform: rotate(110deg) translate(50%) rotate(-110deg); 
+	-webkit-transform: rotate(110deg) translate(200%) rotate(-110deg); 
 }
 div.value7 { 
-	-webkit-transform: rotate(150deg) translate(50%) rotate(-150deg); 
+	-webkit-transform: rotate(150deg) translate(200%) rotate(-150deg); 
 }
 div.value8 { 
-	-webkit-transform: rotate(190deg) translate(50%) rotate(-190deg); 
+	-webkit-transform: rotate(190deg) translate(200%) rotate(-190deg); 
 }
 div.value9 { 
-	-webkit-transform: rotate(230deg) translate(50%) rotate(-230deg); 
+	-webkit-transform: rotate(230deg) translate(200%) rotate(-230deg); 
 }
