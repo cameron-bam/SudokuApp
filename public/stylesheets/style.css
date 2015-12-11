@@ -20,7 +20,10 @@ td, tr {
 	border: 1px dashed;
 }
 
+
 td {
+	width: 11.111111%;
+	height: 11.111111%;
 	position: relative;
 	overflow: visible;
 	text-align: center;
@@ -34,7 +37,6 @@ tr:nth-child(3n){
 td:nth-child(3n+1) {
 	border-left: 2px solid;
 }
-
 
 td:hover {
 	background-color: rgb(200, 200, 200);
