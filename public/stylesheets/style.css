@@ -89,31 +89,35 @@ div.number-picker div.number:hover{
 	font-color: white;
 }
 
+div.clearNumber {
+	-webkit-transform: rotate(-90deg) translate(200%) rotate(90deg)
+}
+
 div.value1 { 
-	-webkit-transform: rotate(-90deg) translate(200%) rotate(90deg);
+	-webkit-transform: rotate(-54deg) translate(200%) rotate(54deg);
 }
 
 div.value2 { 
-	-webkit-transform: rotate(-50deg) translate(200%) rotate(50deg); 
+	-webkit-transform: rotate(-18deg) translate(200%) rotate(18deg); 
 }
 div.value3 { 
-	-webkit-transform: rotate(-10deg) translate(200%) rotate(10deg); 
+	-webkit-transform: rotate(18deg) translate(200%) rotate(-18deg); 
 }
 div.value4 { 
-	-webkit-transform: rotate(30deg) translate(200%) rotate(-30deg); 
+	-webkit-transform: rotate(54deg) translate(200%) rotate(-54deg); 
 }
 div.value5 { 
-	-webkit-transform: rotate(70deg) translate(200%) rotate(-70deg);
+	-webkit-transform: rotate(90deg) translate(200%) rotate(-90deg);
 }
 div.value6 { 
-	-webkit-transform: rotate(110deg) translate(200%) rotate(-110deg); 
+	-webkit-transform: rotate(126deg) translate(200%) rotate(-126deg); 
 }
 div.value7 { 
-	-webkit-transform: rotate(150deg) translate(200%) rotate(-150deg); 
+	-webkit-transform: rotate(162deg) translate(200%) rotate(-162deg); 
 }
 div.value8 { 
-	-webkit-transform: rotate(190deg) translate(200%) rotate(-190deg); 
+	-webkit-transform: rotate(198deg) translate(200%) rotate(-198deg); 
 }
 div.value9 { 
-	-webkit-transform: rotate(230deg) translate(200%) rotate(-230deg); 
+	-webkit-transform: rotate(234deg) translate(200%) rotate(-234deg); 
 }
