@@ -11,21 +11,37 @@ a {
   color: #00B7FF;
 }
 
-table {
+div.sudoku-container {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	width: 473px;
+	height: 100%;
+}
+
+
+table.sudoku-board {
 	border-collapse: collapse;
 	border: 2px solid;
 	margin: 0px;
 	padding: 0px;
-	width: 473px;
+	width: 100%;
 	height: 473px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
 }
 
-td, tr {
+table.sudoku-board td, table.sudoku-board tr {
 	border: 1px dashed;
 }
 
 
-td {
+table.sudoku-board td {
 	width: 11.111111%;
 	height: 11.111111%;
 	position: relative;
@@ -33,19 +49,85 @@ td {
 	text-align: center;
 }
 
+div.sudoku-board-buttons {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
 
-tr:nth-child(3n){
+
+div.color-key-container {
+	width: 50%;
+	padding: 1%;
+	border: 1px solid;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+div.color-key-container div.color-key-title {
+	width: 100%;
+	text-align: center;
+	padding: 0;
+}
+
+table.color-key {
+	border: none;
+	width: 100%;
+	padding: 0;
+}
+
+
+table.sudoku-board tr:nth-child(3n){
 	border-bottom:2px solid;
 }
 
-td:nth-child(3n+1) {
+table.sudoku-board td:nth-child(3n+1) {
 	border-left: 2px solid;
 }
 
-td:hover {
-	background-color: rgb(200, 200, 200);
+
+td.invalid-box-value, table.color-key tr.invalid-box-value td.color-column div.color {
+	background-color: rgb(255, 0, 0);
 }
 
+td.one-possible-box-value,  table.color-key tr.one-possible-box-value td.color-column div.color {
+	background-color: rgb(0, 255, 0);
+}
+
+table.color-key tr.invalid-box-value td.color-column, table.color-key tr.one-possible-box-value td.color-column {
+	padding: 10%;
+	position: relative;
+}
+
+
+
+table.color-key tr.invalid-box-value td.color-column div.color,  table.color-key tr.one-possible-box-value td.color-column div.color{
+	width: 2em;
+	height: 2em;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+table.color-key tr.invalid-box-value td.description, table.color-key tr.one-possible-box-value td.description {
+	font-size: .667em;
+}
+
+table.sudoku-board td:hover {
+	background-color: rgb(200, 200, 200);
+}
 
 div.value {
 	position: static;
@@ -121,3 +203,4 @@ div.value8 {
 div.value9 { 
 	-webkit-transform: rotate(234deg) translate(200%) rotate(-234deg); 
 }
+

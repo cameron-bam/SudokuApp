@@ -7,6 +7,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 		var level = 2;
 		var initialBoxVal = ' ';
 		var recursiveDepth = 0;
+		var hintMode = false;
 
 		var make =  function (dim, lvl, arr, coord) {
 				  if (lvl === 0) {
@@ -269,24 +270,40 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			}
 		};
 
-		this.isBoxValueValid = function (boxCol, boxRow, boxVal) {
-			boxVal = parseInt(boxVal);
+		this.isBoxValueValid = function (boxCol, boxRow) {
+			boxVal = boardContents[boxCol][boxRow].val;
 			var regLen = 3;
 			var rowLen = 9;
 			var regionCol = Math.floor(boxCol/regLen) * regLen;
 			var regionRow = Math.floor(boxRow/regLen) * regLen;
 			var curCol = 0;
-			var curRow = 0;
+			var curRow = 0; 
 
+			// check for empty box
+			if ((boxVal === initialBoxVal) || boardContents[boxCol][boxRow].partOfPuzzlePrompt){
+				return true;
+			}
+
+			// check region for identical values to current cell
 			for (var i = 0; i < regLen; i++) {
 				curCol = regionCol + i;
 				for (var j = 0; j < regLen; j++) {
 					curRow = regionRow + j;
-					if ((this.getBoxValue(curCol, curRow) === boxVal) && ((boxCol !== curCol) || (boxRow !== curRow))) {
-							return false;
+					if ((boardContents[curCol][curRow].val === boxVal) && !((boxCol === curCol) && (boxRow === curRow))) {
+						return false;
 					}
 				}
 			}
+
+			// check row and column of box for identical box values
+			for (var i = 0; i < rowLen; i++) {
+				if (((boardContents[boxCol][i].val === boxVal) && (i !== boxRow)) || ((boardContents[i][boxRow].val === boxVal) && (i !== boxCol))){
+					return false;
+				}
+			}
+
+			// box must be valid
+			return true;
 		};
 
 		this.logBoxDetails = function (boxCol, boxRow) {
@@ -298,7 +315,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			console.log('isPossibleValue: ' + isPossibleValue(boxCol, boxRow, boxVal));
 			console.log('inPossibleValues: ' + inPossibleValues(boxCol, boxRow, boxVal));
 			console.log('possibleValues: ' + boardContents[boxCol][boxRow].possibleValues);
-			console.log('isBoxValueValid: ' + this.isBoxValueValid(boxCol, boxRow, boxVal));
+			console.log('isBoxValueValid: ' + this.isBoxValueValid(boxCol, boxRow));
 		};
 
 
@@ -353,6 +370,9 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 
 		this.resetBoard = function() {
 			var boardLen = dim;
+
+			hintMode = false;
+
 			for (var x = 0; x < boardLen; x++){
 				for (var y = 0; y < boardLen; y++) {
 					if (!this.isPartOfPuzzle(x, y)) {
@@ -361,6 +381,38 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 				}
 			}
 		};
+
+		this.toggleHintMode = function () {
+			hintMode = !hintMode;
+		};
+
+		this.getHintMode = function() {
+			return hintMode;
+		};
+
+		this.getHintButtonText = function () {
+			if (hintMode) {
+				return 'Hide Hints';
+			} else {
+				return 'Show Hints';
+			}
+		};
+
+		this.getBoxCssClass = function(boxCol, boxRow) {
+			var cssClass = '';
+
+			if (this.getHintMode()) {
+						if (!this.isBoxValueValid(boxCol, boxRow) || ((boardContents[boxCol][boxRow].possibleValues.length === 0) && (boardContents[boxCol][boxRow].val === initialBoxVal))) {
+							cssClass = 'invalid-box-value';
+						} else if ((boardContents[boxCol][boxRow].possibleValues.length === 1) && (boardContents[boxCol][boxRow].val === initialBoxVal)){
+							cssClass = 'one-possible-box-value'
+						}
+			
+				}
+
+			return cssClass;
+		};
+
 
 
 		$http({
