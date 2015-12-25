@@ -261,13 +261,16 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			}
 		};
 
-		this.toggleSelector = function (boxCol, boxRow) {
-			if((selectedBox.length === 0) || (!this.isSelectorActive(boxCol, boxRow))) 
+		this.toggleSelector = function (boxCol, boxRow, clickEvent) {
+
+			if (((selectedBox.length === 0) || (!this.isSelectorActive(boxCol, boxRow))) && (typeof boxCol === 'number') && (typeof boxRow === 'number'))
 			{ 
 				selectedBox = [boxCol, boxRow];
 			} else {
 				selectedBox = [];
 			}
+
+			clickEvent.stopPropagation();
 		};
 
 		this.isBoxValueValid = function (boxCol, boxRow) {

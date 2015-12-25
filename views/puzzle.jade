@@ -5,28 +5,32 @@ block content
 		div(class="sudoku-container" ng-controller="SudokuController as sudoku" ng-cloak)
 			table(class="sudoku-board")
 				tr(ng-repeat = "boxRow in [0,1,2,3,4,5,6,7,8]")
-					td(ng-repeat = "boxCol in [0,1,2,3,4,5,6,7,8]" ng-class="'sudoku-region ' + sudoku.board.getBoxCssClass(boxCol, boxRow);" ng-click="sudoku.board.toggleSelector(boxCol, boxRow); sudoku.board.logBoxDetails(boxCol, boxRow);")
+					td(ng-repeat = "boxCol in [0,1,2,3,4,5,6,7,8]" ng-class="'sudoku-region ' + sudoku.board.getBoxCssClass(boxCol, boxRow);" ng-click="sudoku.board.toggleSelector(boxCol, boxRow, $event); sudoku.board.logBoxDetails(boxCol, boxRow, $event);")
 						div(class="number-picker" ng-show="sudoku.board.isSelectorActive(boxCol, boxRow)")
-							div(ng-repeat = "number in [1,2,3,4,5,6,7,8,9]" ng-class="'number value'+number" ng-click="sudoku.board.setBoxValue(boxCol, boxRow, number); sudoku.board.isBoxValueValid(boxCol, boxRow, number);" ng-show="sudoku.board.isPossibleValue(boxCol, boxRow, number) || !(sudoku.board.getHintMode())") {{number}}
+							div(ng-repeat = "number in [1,2,3,4,5,6,7,8,9]" ng-class="'number value'+number" ng-click="sudoku.board.setBoxValue(boxCol, boxRow, number);" ng-show="sudoku.board.isPossibleValue(boxCol, boxRow, number) || !(sudoku.board.getHintMode())") {{number}}
 							div(class="number clearNumber" ng-click="sudoku.board.clearBoxValue(boxCol, boxRow)") X
 						div(class="value") {{sudoku.board.getBoxValue(boxCol, boxRow)}}
 			
-			div(class="sudoku-board-buttons")
-				button(name="boardReset" ng-click="sudoku.board.resetBoard();") Reset
-				button(name="boardSubmit") Submit
-				button(name="solveBoard" ng-click="sudoku.board.attemptToSolve();") Solve
-				button(name="toggleHintMode" ng-click="sudoku.board.toggleHintMode();") {{sudoku.board.getHintButtonText();}}
-			div(class="color-key-container")
+			ul(class='sudoku-board-buttons')
+				li
+					button(name="boardReset" ng-click="sudoku.board.resetBoard();") Reset
+				li
+					button(name="boardSubmit") Submit
+				li
+					button(name="solveBoard" ng-click="sudoku.board.attemptToSolve();") Solve
+				li
+					button(name="toggleHintMode" ng-click="sudoku.board.toggleHintMode();") {{sudoku.board.getHintButtonText();}}
+			div(class="color-key-container" ng-show="sudoku.board.getHintMode();")
 				div(class="color-key-title") Color Key
 				table(class="color-key")
 					tr(class="invalid-box-value")
 						td(class="color-column")
 							div(class="color")
-						td(class="description") Either the value in this box conflicts with another value on the board, or there are no possible values for this box.
+						td(class="description-column") Either the value in this box conflicts with another value on the board, or there are no possible values for this box.
 					tr(class="one-possible-box-value")
 						td(class="color-column")
 							div(class="color")
-						td(class="description") There's only one possible value for this box!  Try filling it in.
+						td(class="description-column") There's only one possible value for this box!  Try filling it in.
 
 
 

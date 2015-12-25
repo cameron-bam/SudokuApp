@@ -2,6 +2,13 @@
 	
 	var app = angular.module('SudokuApp', ['sudokuboard']);
 
+
+	app.controller('GlobalController', ['$scope', 'sudokuBoardFactory', function($scope, sudokuBoardFactory) {
+
+		this.board = sudokuBoardFactory.board;
+	
+	}]);
+
 	app.controller('WelcomePageController', function() {
 		
 		var newPuzzleToday = false;
@@ -14,10 +21,10 @@
 			}
 	});
 
-	app.controller('SudokuController', function(sudokuBoardFactory) {
-
-		this.board = sudokuBoardFactory.board;
+	app.controller('SudokuController', ['$scope', 'sudokuBoardFactory', function($scope, sudokuBoardFactory) {
 		
-	});
+		this.board = sudokuBoardFactory.board;
+
+	}]);
 
 })();
