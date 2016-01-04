@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var board = require('../my_modules/board');
+var puzzleReader = require('../my_modules/puzzleReader');
 
 router.param('puzzleId', function(req,res,next,puzzleId) {
 	req.puzzleId = puzzleId;
@@ -8,11 +8,7 @@ router.param('puzzleId', function(req,res,next,puzzleId) {
 });
 
 router.get('/:puzzleId', function(req, res) {
-	
-	if (req.puzzleId === 'featured') {
-		res.json(board);
-	}
-
+	res.json(puzzleReader(req.puzzleId));
 });
 
 module.exports = router;
