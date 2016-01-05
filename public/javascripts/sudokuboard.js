@@ -417,10 +417,10 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 		};
 
 
-
-		$http({
+		this.getBoard = function(puzzleId) {
+			$http({
 				  method: 'GET',
-				  url: '/getpuzzle/featured'
+				  url: '/puzzles/getboard/' + puzzleId,
 				}).then(function successCallback(response) {
 					  
 					  for (var col in response.data) {
@@ -437,6 +437,8 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 	  			}, function errorCallback(response) {
 	  				alert("Could not retreive puzzle!")
 	  			});
+		};
+		
 
 
 	}

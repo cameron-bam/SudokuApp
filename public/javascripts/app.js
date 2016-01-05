@@ -2,10 +2,22 @@
 	
 	var app = angular.module('SudokuApp', ['sudokuboard']);
 
+	app.config(function($locationProvider) {
+		$locationProvider.html5Mode({
+									  enabled: true,
+									  requireBase: false
+									});
+	});
 
-	app.controller('GlobalController', ['$scope', 'sudokuBoardFactory', function($scope, sudokuBoardFactory) {
+
+	app.controller('GlobalController', ['$scope', 
+										'$location', 
+										'sudokuBoardFactory', 
+	function($scope, $location, sudokuBoardFactory) {
 
 		this.board = sudokuBoardFactory.board;
+
+		console.log($location.path());
 	
 	}]);
 
