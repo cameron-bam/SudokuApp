@@ -9,12 +9,26 @@ var readPuzzleFromFile = function(puzzleId) {
   return JSON.parse(puzzleString);
 };
 
-var getListOfPuzzles = function() {
-	var listOfPuzzles = fs.readdirSync('./puzzles');
+var getAllPuzzleInfo = function() {
+	var puzzleIds = fs.readdirSync('./puzzles');
+
+	var listOfPuzzles = []
+	var curPuzzleInfo = {};
+	var curPuzzleId = '';
+
+	for (var puzzleId in puzzleIds) {
+		if (puzzleIds.hasOwnProperty(puzzleId)) {
+			curPuzzleId = puzzleIds[puzzleId];
+			console.log('puzzleId: ' + puzzleId + ', puzzleIds[puzzleId]: ' + puzzleIds[puzzleId] + ', curPuzzleId: ' + curPuzzleId);
+			curPuzzleInfo = readPuzzleFromFile(curPuzzleId).puzzleInfo;
+			curPuzzleInfo.puzzleId = curPuzzleId;
+			listOfPuzzles.push(curPuzzleInfo);
+		}
+	}
 
 	console.log(listOfPuzzles);
 
 	return listOfPuzzles;
 };
 
-module.exports = {"readPuzzleFromFile": readPuzzleFromFile, "getListOfPuzzles": getListOfPuzzles};
+module.exports = {"readPuzzleFromFile": readPuzzleFromFile, "getAllPuzzleInfo": getAllPuzzleInfo};

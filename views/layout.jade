@@ -9,12 +9,15 @@ html(ng-app="SudokuApp" ng-controller="GlobalController as global" ng-click="glo
 		nav
 			ul
 				li
-					a(href='/') Home
+					a(href='/#/index') Home
 				li 
-					a(href='/puzzles') All Puzzles
+					a(href='/#/allpuzzles') All Puzzles
 				li 
-					a(href='/puzzles/featured') Featured Puzzle
-		block content
+					a(href='/#/puzzles/featured') Featured Puzzle
+		ng-view
 		script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js')
+		script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js')
+		script(type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.js')
 		script(type='text/javascript', src='/javascripts/app.js')
 		script(type='text/javascript', src='/javascripts/sudokuboard.js')
+		script(type='text/javascript', src='/javascripts/puzzlelist.js')

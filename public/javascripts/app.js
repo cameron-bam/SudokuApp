@@ -1,25 +1,48 @@
 (function() {
 	
-	var app = angular.module('SudokuApp', ['sudokuboard']);
+	var app = angular.module('SudokuApp', ['sudokuboard', 'puzzlelist', 'ngRoute']);
 
-	app.config(function($locationProvider) {
-		$locationProvider.html5Mode({
-									  enabled: true,
-									  requireBase: false
-									});
-	});
+	app.config(['$routeProvider', function($routeProvider) {
+		$routeProvider.when('/allpuzzles', {
+				templateUrl: '/partials/allpuzzles',
+				controller: 'PuzzleListController'
+		}).when('/index', {
+			templateUrl: '/partials/index'
+		}).when('/puzzles/:puzzleId', {
+			templateUrl: 'partials/puzzle'
+		}).otherwise({
+			redirectTo: '/'
+		});
+	}]);
 
 
-	app.controller('GlobalController', ['$scope', 
-										'$location', 
+	app.controller('GlobalController', ['$scope',
+										'$routeParams',
 										'sudokuBoardFactory', 
-	function($scope, $location, sudokuBoardFactory) {
+	function($scope, $routeParams, sudokuBoardFactory) {
 
 		this.board = sudokuBoardFactory.board;
 
-		console.log($location.path());
+		$scope.clearBoard = this.board.clearBoard;
+		$scope.getBoard = this.board.getBoard;
+
+		$scope.$on('$routeChangeSuccess', function() {
+
+
+			console.log('$routeParams.puzzleId: ' + $routeParams.puzzleId);
+
+			
+			$scope.clearBoard();
+			
+			if (typeof $routeParams.puzzleId !== 'undefined') {
+				$scope.getBoard($routeParams.puzzleId);
+			}
+			
+		});
+
 	
 	}]);
+
 
 	app.controller('WelcomePageController', function() {
 		
@@ -33,10 +56,28 @@
 			}
 	});
 
-	app.controller('SudokuController', ['$scope', 'sudokuBoardFactory', function($scope, sudokuBoardFactory) {
-		
-		this.board = sudokuBoardFactory.board;
 
+	app.controller('PuzzleListController', ['$scope',
+											'puzzleListFactory', 
+	function($scope, puzzleListFactory) {
+		
+		var puzzleListResource = puzzleListFactory;
+
+		this.puzzles = puzzleListResource.get();
+
+		for (var param in this.puzzles) {
+			if (this.puzzleList.hasOwnProperty(param)) {
+				console.log('param: ' + param)
+			}
+		}
+
+		console.log(this.puzzles);
+	}]);
+
+	app.controller('SudokuController', ['$scope', 
+										'sudokuBoardFactory', 
+	function($scope, sudokuBoardFactory) {
+		this.board = sudokuBoardFactory.board;
 	}]);
 
 })();

@@ -416,6 +416,10 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			return cssClass;
 		};
 
+		this.clearBoard = function() {
+			boardContents = make(dim, level);
+		};
+
 
 		this.getBoard = function(puzzleId) {
 			$http({
