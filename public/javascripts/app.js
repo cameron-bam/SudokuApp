@@ -2,16 +2,23 @@
 	
 	var app = angular.module('SudokuApp', ['sudokuboard', 'puzzlelist', 'ngRoute']);
 
-	app.config(['$routeProvider', function($routeProvider) {
+	app.config(['$routeProvider',
+	function($routeProvider) {
 		$routeProvider.when('/allpuzzles', {
 				templateUrl: '/partials/allpuzzles',
-				controller: 'PuzzleListController'
+				controller: 'PuzzleListController',
+				resolve: {
+					requestStatus: function($http, puzzleList) {
+						return puzzleList.setPuzzleInfo($http);
+					}
+				}
 		}).when('/index', {
-			templateUrl: '/partials/index'
+			templateUrl: '/partials/index',
+			controller: 'WelcomePageController'
 		}).when('/puzzles/:puzzleId', {
 			templateUrl: 'partials/puzzle'
 		}).otherwise({
-			redirectTo: '/'
+			redirectTo: '/index'
 		});
 	}]);
 
@@ -57,23 +64,16 @@
 	});
 
 
-	app.controller('PuzzleListController', ['$scope',
-											'puzzleListFactory', 
-	function($scope, puzzleListFactory) {
-		
-		var puzzleListResource = puzzleListFactory;
+	// controller for All Puzzles page
+	app.controller('PuzzleListController',
+		function(puzzleList) {
+			
+			this.puzzles = puzzleList.getPuzzleInfo();
+			
+		});
 
-		this.puzzles = puzzleListResource.get();
-
-		for (var param in this.puzzles) {
-			if (this.puzzleList.hasOwnProperty(param)) {
-				console.log('param: ' + param)
-			}
-		}
-
-		console.log(this.puzzles);
-	}]);
-
+	// possibly unneccessary controller - all functionality is encompassed within global
+	// controller
 	app.controller('SudokuController', ['$scope', 
 										'sudokuBoardFactory', 
 	function($scope, sudokuBoardFactory) {
