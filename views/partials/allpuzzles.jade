@@ -1,6 +1,7 @@
 main(ng-cloak ng-controller="PuzzleListController as puzzleList")
-	ul
-		li(ng-repeat="puzzle in puzzleList.puzzles") 
-			a(ng-href="/#/puzzles/{{puzzle.puzzleId}}") {{puzzle.name}} 
-			p created on {{puzzle.created}}
+	div(class="allPuzzles")
+		ul
+			li(ng-repeat="puzzle in puzzleList.puzzles") 
+				a(ng-href="/#/puzzles/{{puzzle.puzzleId}}") {{puzzle.name}}
+				p  created on {{puzzle.created}}
 

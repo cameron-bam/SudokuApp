@@ -16,63 +16,128 @@ header {
 	text-align: center;
 	width: 100%;
 	height: 10%;
-	background-color: #DD4814;
+	padding-top: 2.5%;
+	background: linear-gradient(0deg, #77216F, #77216F 75%, #924D8B);
+	color: #F2F1F0;
+	padding-bottom: 0.666667em;
 }
 
 header h1 {
 	width: 94%;
 	height: 100%;
 	margin: 0px;
-	padding: 3%;
+	padding-left: 3%;
+	padding-right: 3%;
+	padding-top: 0;
+	padding-bottom: 0.166667em;
 	font-size: 54px;
-	color: #77216F;
+	text-shadow: 2px 2px #2C001E;
 }
 
 nav {
 	position: relative;
 	text-align: center;
-	background-color: #DD4814;
-	padding-bottom: 1em;
 	margin: 0px;
 	border: 0px;
 }
 
-nav ul {
+ul {
 	padding: 0px;
 	margin: 0px;
 }
 
 nav ul li {
 	display: inline;
-	padding: 0;
 	margin: 0;
 	border: 0;
+	padding-left: 0.25em;
+	padding-right: 0.25em;
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
-
-nav ul li a {
+nav ul li a.navButton {
 	text-decoration: none;
+	display: inline-block;
+	position: relative;
+	padding: 0.666667em;
+	height: 2.5em;
+	margin: 0;
+	padding: 0;
+	z-index: 1;
+}
+
+/* width controlled individually b/c button contents are absolutely positioned */
+
+nav ul li a.Home {
+	width: 4em;
+}
+
+nav ul li a.allPuzzles {
+	width: 6em;
+}
+
+nav ul li a.featuredPuzzle {
+	width: 9em;
+}
+
+nav ul li div.navButtonBackground {
+	position: absolute;
 	height: 100%;
 	width: 100%;
-	padding: 1em;
+	border-radius: 0.333333em;
 	border: 0;
 	margin: 0;
-	transition: background-color 0.15s, color 0.15s;
+	opacity: 0;
+	background: linear-gradient(0deg, #DD4814, #E05A2B);
+	box-shadow: 1px 1px #2C001E;
+	transition: opacity 0.15s;
 	transition-delay: 0.05s;
-
 }
 
-nav ul li a:hover {
-	background-color: #77216F;
+nav ul li p {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	line-height: 2.5em; /* match height of nav button */
+	margin: 0;
+	border: 0;
+	text-align: center;
+	background: rgba(0,0,0,0);
 	color: #F2F1F0;
+	pointer-events: none;
+	text-shadow: 1px 1px #2C001E;
 }
 
-a:active {
-	color: #DD4814;
+nav ul li div.navButtonBackground:hover {
+	opacity: 1;
 }
 
 main {
-	margin-top: 2em;
+	margin-top: 3.5em;
+	width: 100%;
+}
+
+main div.Welcome, main div.allPuzzles {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	width: 60%;
+	height: 100%;
+}
+
+main div.Welcome p {
+	text-align: center;
+}
+
+main div.allPuzzles p {
+	display: inline;
+}
+
+main a:active {
+	color: #DD4814;
 }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;

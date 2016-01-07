@@ -7,14 +7,20 @@ html(ng-app="SudokuApp" ng-controller="GlobalController as global" ng-click="glo
 	body
 		header
 			h1 Express Sudoku
-		nav
-			ul
-				li
-					a(href='/#/index') Home
-				li 
-					a(href='/#/allpuzzles') All Puzzles
-				li 
-					a(href='/#/puzzles/featured') Featured Puzzle
+			nav
+				ul
+					li
+						a(class="navButton Home" href='/#/index')
+							div(class="navButtonBackground")
+							p Home
+					li
+						a(class="navButton allPuzzles" href='/#/allpuzzles')
+							div(class="navButtonBackground")
+							p All Puzzles
+					li
+						a(class="navButton featuredPuzzle" href='/#/puzzles/featured')
+							div(class="navButtonBackground")
+							p Featured Puzzle
 		ng-view
 		script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js')
 		script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js')
