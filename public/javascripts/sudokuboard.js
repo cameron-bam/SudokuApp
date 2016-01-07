@@ -1,3 +1,14 @@
+/*
+	sudokuboard.js
+
+	Author:  Cameron White
+
+	Descprition:  	Responsible for managing the sudokuboard data (stored in boardContents)
+					and for providing methods used to handle user interactions with the 
+					game board.
+*/
+
+
 angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', function($http) {
 
 	function Board() {
@@ -9,6 +20,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 		var recursiveDepth = 0;
 		var hintMode = false;
 
+		/* create the board data and store it in boardContents */
 		var make =  function (dim, lvl, arr, coord) {
 				  if (lvl === 0) {
 				  	return {val: initialBoxVal,
@@ -35,6 +47,9 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 
 		var selectedBox = [];
 
+
+		/* methods used to manage possible values for each square */
+		
 		var removePossibleValue = function (boxCol, boxRow, value) {
 			var valIndex = boardContents[boxCol][boxRow].possibleValues.indexOf(value);
 			
@@ -115,6 +130,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 		};
 
 
+		/* clear an individual value on the board and update possible values of other boxes */
 		var clearBoxValue = function (boxCol, boxRow) {
 			if (boardContents[boxCol][boxRow].val !== initialBoxVal) {
 				
@@ -132,18 +148,12 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 				var curRow = 0;
 				var curCol = 0;
 				
-			//	console.log('(boxCol, boxRow): (' + boxCol + ',' + boxRow + ') oldValue: ' + oldValue);
-
-				// console.log('isPossibleColValue(boxCol, boxRow, oldValue): ' + isPossibleColValue(boxCol, boxRow, oldValue));
-
 				if (isPossibleColValue(boxCol, boxRow, oldValue)) {
 					for (var i = 0; i < regLen; i++) {
 						curRegion = i * regLen;
-					//	console.log('(regionCol, curRegion): (' + regionCol + ',' + curRegion + ') isPossibleRegionValue(regionCol, curRegion, oldValue): ' + isPossibleRegionValue(regionCol, curRegion, oldValue));
 						if (curRegion !== regionRow && isPossibleRegionValue(regionCol, curRegion, oldValue)) {
 							for (var j = 0; j < regLen; j++) {
 								curBox = curRegion + j;
-							//	console.log('(boxCol, curBox): (' + boxCol + ',' + curBox + ') isPossibleRowValue(boxCol, curBox, oldValue): ' + isPossibleRowValue(boxCol, curBox, oldValue));
 								if (isPossibleRowValue(boxCol, curBox, oldValue)) {
 									addPossibleValue(boxCol, curBox, oldValue);
 								}
@@ -151,8 +161,6 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 						}
 					}
 				}
-
-				// console.log('isPossibleRowValue(boxCol, boxRow, oldValue): ' + isPossibleRowValue(boxCol, boxRow, oldValue));
 
 				if (isPossibleRowValue(boxCol, boxRow, oldValue)) {
 					for (var i = 0; i < regLen; i++) {
@@ -167,8 +175,6 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 						}
 					}
 				}
-
-				// console.log('isPossibleRegionValue(boxCol, boxRow, oldValue): ' + isPossibleRegionValue(boxCol, boxRow, oldValue));
 
 				if (isPossibleRegionValue(boxCol, boxRow, oldValue)) {
 					for (var x = 0; x < regLen; x++) {
@@ -185,6 +191,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 
 		};
 
+		/* set a single value of a box on the board and update the possible values of the other boxes */
 		var setBoxValue = function (boxCol, boxRow, value) {
 
 			if (boardContents[boxCol][boxRow].val !== initialBoxVal) {
@@ -217,6 +224,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 
 		};
 
+		/* used to set a box value and make the value uneditable to the user during a puzzle attempt */
 		var setPuzzlePrompt = function (boxCol, boxRow, value) {
 				setBoxValue(boxCol, boxRow, value);
 				boardContents[boxCol][boxRow].partOfPuzzlePrompt = true;
@@ -242,14 +250,17 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 
 		this.isPossibleValue = isPossibleValue;
 
+		/* used to get value of an individual box from the view */
 		this.getBoxValue = function(boxCol, boxRow) {
 			return boardContents[boxCol][boxRow].val;
 		}
 
+		/* used to determine if a user can edit a box from the view */
 		this.isPartOfPuzzle = function (boxCol, boxRow) {
 			return boardContents[boxCol][boxRow].partOfPuzzlePrompt;
 		};
 
+		/* used to determine if the number selector for an individual box is currently active */
 		this.isSelectorActive = function (boxCol, boxRow) {
 		//	console.log('checking if active: ' + regCol + ' ' + regRow + ' ' + boxCol + ' ' + boxRow);
 			if ((selectedBox[0] === boxCol) 
@@ -261,6 +272,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			}
 		};
 
+		/* used to activate/deactivate the number selector on an individual box */
 		this.toggleSelector = function (boxCol, boxRow, clickEvent) {
 
 			if (((selectedBox.length === 0) || (!this.isSelectorActive(boxCol, boxRow))) && (typeof boxCol === 'number') && (typeof boxRow === 'number'))
@@ -273,6 +285,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			clickEvent.stopPropagation();
 		};
 
+		/* used to determine if there are invalid values on the board */
 		this.isBoxValueValid = function (boxCol, boxRow) {
 			boxVal = boardContents[boxCol][boxRow].val;
 			var regLen = 3;
@@ -309,6 +322,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			return true;
 		};
 
+		/* used to print details to console during development */
 		this.logBoxDetails = function (boxCol, boxRow) {
 			var boxVal = this.getBoxValue(boxCol, boxRow);
 			console.log('coordinates: (' + boxCol + ',' + boxRow + ')');
@@ -321,7 +335,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			console.log('isBoxValueValid: ' + this.isBoxValueValid(boxCol, boxRow));
 		};
 
-
+		/* dfs algorithm used to find a solution to the puzzle */
 		this.solvePuzzle = function() {
 			var solved = false;
 			var boardLen = dim;
@@ -335,10 +349,8 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			for (var x = 0; x < boardLen; x++) {
 				for (var y = 0; y < boardLen; y++) {
 					if (boardContents[x][y].val === initialBoxVal) {
-					//	console.log('coordinates: ' + '(' + x + ',' + y + ')' + ' possibleValues: ' + boardContents[x][y].possibleValues);
 						for (var i in boardContents[x][y].possibleValues) {
 							recursiveDepth++;
-					//		console.log('possibleValue: ' + boardContents[x][y].possibleValues[i]);
 							setBoxValue(x, y, boardContents[x][y].possibleValues[i]);
 							solved = this.solvePuzzle();
 							recursiveDepth--;
@@ -359,7 +371,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 
 		};
 
-
+		/* uses previously defined dfs algorithm to solve the puzzle, alerts users if there is no solution */
 		this.attemptToSolve = function() {
 			var isSolved = this.solvePuzzle();
 
@@ -371,6 +383,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 
 		};
 
+		/* erases all user changes to a puzzle, while preserving the original prompt */
 		this.resetBoard = function() {
 			var boardLen = dim;
 
@@ -385,14 +398,17 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			}
 		};
 
+		/* used to control user aids on the board */
 		this.toggleHintMode = function () {
 			hintMode = !hintMode;
 		};
 
+		/* used to access hint mode from the view */
 		this.getHintMode = function() {
 			return hintMode;
 		};
 
+		/* controls the text of the hint mode button */
 		this.getHintButtonText = function () {
 			if (hintMode) {
 				return 'Hide Hints';
@@ -401,6 +417,7 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			}
 		};
 
+		/* used to provide a css class involved in rendering hints to the user */
 		this.getBoxCssClass = function(boxCol, boxRow) {
 			var cssClass = '';
 
@@ -416,17 +433,18 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			return cssClass;
 		};
 
-		this.clearBoard = function() {
-			boardContents = make(dim, level);
-		};
+		/* returns a promise used to load a new puzzle from a json object stored on the server */
+		this.setBoard = function(puzzleId) {
 
-
-		this.getBoard = function(puzzleId) {
-			$http({
+			return $http({
 				  method: 'GET',
 				  url: '/puzzles/getboard/' + puzzleId,
 				}).then(function successCallback(response) {
+
+					  hintMode = false;
 					  
+					  boardContents = make(dim, level);
+
 					  for (var col in response.data) {
 					  	if (response.data.hasOwnProperty(col)) {
 					  		var rows = response.data[col];
@@ -451,7 +469,5 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 
 	var board = new Board();
 	
-	return {
-		board: board
-	};
+	return board;
 }]);

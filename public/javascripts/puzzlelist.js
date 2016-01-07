@@ -1,3 +1,14 @@
+/*
+	puzzlelist.js
+
+	Author:  Cameron White
+
+	Descprition:  	Responsible for retrieving and storing puzzle info used 
+					by the All Puzzles page.
+
+
+*/
+
 angular.module('puzzlelist', [])
 	.service('puzzleList', 
 	[ function() {
@@ -12,13 +23,11 @@ angular.module('puzzlelist', [])
 							.then(
 							function successCallBack(response) {
 								puzzles = response.data;
-								requestStatus = 'Success';
-								return requestStatus;
+								return true;
 							},
 							function errorCallBack(response) {
-								window.alert("Couldn't retrieve the list of puzzles!")
-								requestStatus = 'Failure'
-								return requestStatus;
+								window.alert("Couldn't retrieve the list of puzzles!");
+								return false;
 							});
 				};
 

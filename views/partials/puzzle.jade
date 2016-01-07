@@ -1,23 +1,23 @@
 main
-	div(class="sudoku-container" ng-controller="SudokuController as sudoku" ng-cloak)
+	div(class="sudoku-container" ng-cloak)
 		table(class="sudoku-board")
 			tr(ng-repeat = "boxRow in [0,1,2,3,4,5,6,7,8]")
-				td(ng-repeat = "boxCol in [0,1,2,3,4,5,6,7,8]" ng-class="'sudoku-region ' + sudoku.board.getBoxCssClass(boxCol, boxRow);" ng-click="sudoku.board.toggleSelector(boxCol, boxRow, $event); sudoku.board.logBoxDetails(boxCol, boxRow, $event);")
-					div(class="number-picker" ng-show="sudoku.board.isSelectorActive(boxCol, boxRow)")
-						div(ng-repeat = "number in [1,2,3,4,5,6,7,8,9]" ng-class="'number value'+number" ng-click="sudoku.board.setBoxValue(boxCol, boxRow, number);" ng-show="sudoku.board.isPossibleValue(boxCol, boxRow, number) || !(sudoku.board.getHintMode())") {{number}}
-						div(class="number clearNumber" ng-click="sudoku.board.clearBoxValue(boxCol, boxRow)") X
-					div(class="value") {{sudoku.board.getBoxValue(boxCol, boxRow)}}
+				td(ng-repeat = "boxCol in [0,1,2,3,4,5,6,7,8]" ng-class="'sudoku-region ' + global.board.getBoxCssClass(boxCol, boxRow);" ng-click="global.board.toggleSelector(boxCol, boxRow, $event); global.board.logBoxDetails(boxCol, boxRow, $event);")
+					div(class="number-picker" ng-show="global.board.isSelectorActive(boxCol, boxRow)")
+						div(ng-repeat = "number in [1,2,3,4,5,6,7,8,9]" ng-class="'number value'+number" ng-click="global.board.setBoxValue(boxCol, boxRow, number);" ng-show="global.board.isPossibleValue(boxCol, boxRow, number) || !(global.board.getHintMode())") {{number}}
+						div(class="number clearNumber" ng-click="global.board.clearBoxValue(boxCol, boxRow)") X
+					div(class="value") {{global.board.getBoxValue(boxCol, boxRow)}}
 		
 		ul(class='sudoku-board-buttons')
 			li
-				button(name="boardReset" ng-click="sudoku.board.resetBoard();") Reset
+				button(name="boardReset" ng-click="global.board.resetBoard();") Reset
 			li
 				button(name="boardSubmit") Submit
 			li
-				button(name="solveBoard" ng-click="sudoku.board.attemptToSolve();") Solve
+				button(name="solveBoard" ng-click="global.board.attemptToSolve();") Solve
 			li
-				button(name="toggleHintMode" ng-click="sudoku.board.toggleHintMode();") {{sudoku.board.getHintButtonText();}}
-		div(class="color-key-container" ng-show="sudoku.board.getHintMode();")
+				button(name="toggleHintMode" ng-click="global.board.toggleHintMode();") {{global.board.getHintButtonText();}}
+		div(class="color-key-container" ng-show="global.board.getHintMode();")
 			div(class="color-key-title") Color Key
 			table(class="color-key")
 				tr(class="invalid-box-value")

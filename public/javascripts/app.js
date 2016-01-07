@@ -16,41 +16,29 @@
 			templateUrl: '/partials/index',
 			controller: 'WelcomePageController'
 		}).when('/puzzles/:puzzleId', {
-			templateUrl: 'partials/puzzle'
+			templateUrl: 'partials/puzzle',
+			resolve: {
+				requestStatus: function(sudokuBoardFactory, $route) {
+					return sudokuBoardFactory.setBoard($route.current.params.puzzleId);
+				}
+			}
 		}).otherwise({
 			redirectTo: '/index'
 		});
 	}]);
 
 
+	// controller for the sudoku board.  needs to handle clicks to the whole page
 	app.controller('GlobalController', ['$scope',
 										'$routeParams',
 										'sudokuBoardFactory', 
 	function($scope, $routeParams, sudokuBoardFactory) {
 
-		this.board = sudokuBoardFactory.board;
-
-		$scope.clearBoard = this.board.clearBoard;
-		$scope.getBoard = this.board.getBoard;
-
-		$scope.$on('$routeChangeSuccess', function() {
-
-
-			console.log('$routeParams.puzzleId: ' + $routeParams.puzzleId);
-
-			
-			$scope.clearBoard();
-			
-			if (typeof $routeParams.puzzleId !== 'undefined') {
-				$scope.getBoard($routeParams.puzzleId);
-			}
-			
-		});
-
+		this.board = sudokuBoardFactory;
 	
 	}]);
 
-
+	// controller for Welcome Page
 	app.controller('WelcomePageController', function() {
 		
 		var newPuzzleToday = false;
@@ -67,17 +55,9 @@
 	// controller for All Puzzles page
 	app.controller('PuzzleListController',
 		function(puzzleList) {
-			
+
 			this.puzzles = puzzleList.getPuzzleInfo();
 			
 		});
-
-	// possibly unneccessary controller - all functionality is encompassed within global
-	// controller
-	app.controller('SudokuController', ['$scope', 
-										'sudokuBoardFactory', 
-	function($scope, sudokuBoardFactory) {
-		this.board = sudokuBoardFactory.board;
-	}]);
 
 })();
