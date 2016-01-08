@@ -92,7 +92,6 @@ nav ul li div.navButtonBackground {
 	background: linear-gradient(0deg, #DD4814, #E05A2B);
 	box-shadow: 1px 1px #2C001E;
 	transition: opacity 0.15s;
-	transition-delay: 0.05s;
 }
 
 nav ul li p {
@@ -111,6 +110,11 @@ nav ul li p {
 
 nav ul li div.navButtonBackground:hover {
 	opacity: 1;
+}
+
+nav ul li div.navButtonBackground:active {
+	box-shadow: -1px -1px #2C001E;
+	background: linear-gradient(0deg, #C42F00, #C74112);
 }
 
 main {
@@ -175,6 +179,7 @@ table.sudoku-board td {
 	position: relative;
 	overflow: visible;
 	text-align: center;
+	transition: background-color 0.1s;
 }
 
 ul.sudoku-board-buttons {
@@ -261,7 +266,7 @@ table.color-key tr.invalid-box-value td.description-column, table.color-key tr.o
 }
 
 table.sudoku-board td:hover {
-	background-color: rgb(200, 200, 200);
+	background-color: #924D8B;
 }
 
 div.value {
