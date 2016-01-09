@@ -3,7 +3,7 @@ body {
   margin: 0px;
   /* font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; */
   font: 14px 'Ubuntu', Helvetica;
-  background-color: #F1E9ED;
+  background: linear-gradient(90deg, #DDC9D4, #F1E9ED 10%, #F1E9ED 90%, #DDC9D4);
   color: #2C001E;
 }
 
@@ -17,7 +17,7 @@ header {
 	width: 100%;
 	height: 10%;
 	padding-top: 2.5%;
-	background: linear-gradient(0deg, #77216F, #77216F 75%, #924D8B);
+	background: #77216F; /* linear-gradient(90deg, #77216F, #77216F 75%, #924D8B); */
 	color: #F2F1F0;
 	padding-bottom: 0.666667em;
 }
@@ -31,7 +31,6 @@ header h1 {
 	padding-top: 0;
 	padding-bottom: 0.166667em;
 	font-size: 54px;
-	text-shadow: 2px 2px #2C001E;
 }
 
 nav {
@@ -89,7 +88,7 @@ nav ul li div.navButtonBackground {
 	border: 0;
 	margin: 0;
 	opacity: 0;
-	background: linear-gradient(0deg, #DD4814, #E05A2B);
+	background: linear-gradient(0deg, #DD4814, #E77E5A);
 	box-shadow: 1px 1px #2C001E;
 	transition: opacity 0.15s;
 }
@@ -112,8 +111,8 @@ nav ul li div.navButtonBackground:hover {
 	opacity: 1;
 }
 
-nav ul li div.navButtonBackground:active {
-	box-shadow: -1px -1px #2C001E;
+nav ul li div.navButtonBackground:active, main div.allPuzzles div.puzzleCard a.cardRow:active {
+	box-shadow: none;
 	background: linear-gradient(0deg, #C42F00, #C74112);
 }
 
@@ -123,22 +122,94 @@ main {
 }
 
 main div.Welcome, main div.allPuzzles {
-	position: absolute;
 	margin-left: auto;
 	margin-right: auto;
 	left: 0;
 	right: 0;
-	width: 60%;
+	width: 70%;
+	max-width: 630px;
+	overflow: hidden;
 	height: 100%;
+	text-align: center;
 }
 
 main div.Welcome p {
 	text-align: center;
 }
 
-main div.allPuzzles p {
-	display: inline;
+main div.allPuzzles div.puzzleCard {
+	display: inline-block;
+	margin: 1%;
+	padding: 0;
+	width: 300px;
 }
+
+main div.allPuzzles .cardRow {
+	display: inline-block;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+	width: 100%;
+}
+
+main div.allPuzzles div.cardRow {
+	background: linear-gradient(0deg, #77216F, #9F639A);
+	border-top-right-radius: 0.333333em;
+	border-top-left-radius: 0.333333em;
+}
+
+
+main div.allPuzzles div.puzzleCard div.imgContainer {
+	float: left;
+	margin: 0;
+	border-top: 0;
+	border-left: 0;
+	border-bottom: 0;
+	background: #2C001E;
+	padding: 5%;
+	border-top-left-radius: 0.333333em;
+}
+
+main div.allPuzzles div.puzzleCard div.imgContainer img {
+	display: block;
+}
+
+main div.allPuzzles div.puzzleCard div.contentContainer {
+	padding-top: 2.5%;
+	padding-bottom: 2.5%;
+	margin: 0;
+	border: 0;
+	overflow: hidden;
+	text-shadow: 1px 1px #2C001E;
+	color: #F2F1F0;
+}
+
+main div.allPuzzles div.puzzleCard div.contentContainer div.puzzleTitle {
+	width: 100%;
+	font-size: 1.3em;
+}
+
+main div.allPuzzles div.puzzleCard div.contentContainer div.puzzleDescription {
+	width: 100%;
+	padding-top: 0.5em;
+}
+
+
+main div.allPuzzles div.puzzleCard a.cardRow {
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	z-index: -1;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	background: linear-gradient(0deg, #DD4814, #E77E5A);
+	border-bottom-left-radius: 0.333333em;
+	border-bottom-right-radius: 0.333333em;
+	color: #F2F1F0;
+	text-shadow: 1px 1px #2C001E;
+}
+
 
 main a:active {
 	color: #DD4814;
@@ -149,6 +220,7 @@ main a:active {
 
 
 div.sudoku-container {
+	color: #2C001E;
 	position: absolute;
 	margin-left: auto;
 	margin-right: auto;
@@ -179,7 +251,7 @@ table.sudoku-board td {
 	position: relative;
 	overflow: visible;
 	text-align: center;
-	transition: background-color 0.1s;
+	transition: background-color 0.1s, text-shadow 0.1s, color 0.1s;
 }
 
 ul.sudoku-board-buttons {
@@ -267,6 +339,10 @@ table.color-key tr.invalid-box-value td.description-column, table.color-key tr.o
 
 table.sudoku-board td:hover {
 	background-color: #924D8B;
+	color: #F2F1F0;
+	text-shadow: 1px 1px #2C001E;
+	border-color: #2C001E;
+	cursor: pointer;
 }
 
 div.value {
@@ -278,16 +354,21 @@ div.value {
 div.number-picker {
 	position: absolute;
 	display: block;
-	top: -1px;
-	left: -1px;
-	width: 100%;
-	height: 100%;
+	background: linear-gradient(0deg, #77216F, #9F639A);
+	top: -25%;
+	left: -25%;
+	width: 150%;
+	height: 150%;
 	border-radius: 50%;
-	border: 1px dashed;
 	z-index: 99;
+	color: #F2F1F0;
 }
 
-div.number-picker div.number {
+div.number-picker:hover{
+	cursor: default;
+}
+
+div.number-picker a.number,  div.number-picker div.value{
 	position: absolute;
 	display: block;
 	height: 1em;
@@ -300,47 +381,64 @@ div.number-picker div.number {
 	margin: auto;
 	z-index: auto;
 	border-radius: 50%;
+	transition: background-color 0.15s;
 }
 
-div.number-picker div.number a{
+div.number-picker a.number {
+	text-shadow: none;
+}
+
+div.number-picker div.value{
+	text-shadow: 1px 1px #2C001E;
+}
+
+div.number-picker a.number {
 	border-radius: 50%;
 	z-index: 100;
-}
-div.number-picker div.number:hover{
-	background-color: red;
-	font-color: white;
+
 }
 
-div.clearNumber {
+div.number-picker a.number:hover{
+	background-color: #E77E5A;
+	text-shadow: 1px 1px #2C001E;
+	cursor: pointer;
+}
+
+div.number-picker a.number:active {
+	background: linear-gradient(0deg, #C42F00, #C74112);
+	color: #F2F1F0;
+}
+
+a.clearNumber {
 	-webkit-transform: rotate(-90deg) translate(200%) rotate(90deg)
 }
 
-div.value1 { 
+a.value1 { 
 	-webkit-transform: rotate(-54deg) translate(200%) rotate(54deg);
 }
 
-div.value2 { 
+a.value2 { 
 	-webkit-transform: rotate(-18deg) translate(200%) rotate(18deg); 
 }
-div.value3 { 
+a.value3 { 
 	-webkit-transform: rotate(18deg) translate(200%) rotate(-18deg); 
 }
-div.value4 { 
+a.value4 { 
 	-webkit-transform: rotate(54deg) translate(200%) rotate(-54deg); 
 }
-div.value5 { 
+a.value5 { 
 	-webkit-transform: rotate(90deg) translate(200%) rotate(-90deg);
 }
-div.value6 { 
+a.value6 { 
 	-webkit-transform: rotate(126deg) translate(200%) rotate(-126deg); 
 }
-div.value7 { 
+a.value7 { 
 	-webkit-transform: rotate(162deg) translate(200%) rotate(-162deg); 
 }
-div.value8 { 
+a.value8 { 
 	-webkit-transform: rotate(198deg) translate(200%) rotate(-198deg); 
 }
-div.value9 { 
+a.value9 { 
 	-webkit-transform: rotate(234deg) translate(200%) rotate(-234deg); 
 }
 

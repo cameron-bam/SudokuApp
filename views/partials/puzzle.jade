@@ -3,9 +3,10 @@ main
 		table(class="sudoku-board")
 			tr(ng-repeat = "boxRow in [0,1,2,3,4,5,6,7,8]")
 				td(ng-repeat = "boxCol in [0,1,2,3,4,5,6,7,8]" ng-class="'sudoku-region ' + global.board.getBoxCssClass(boxCol, boxRow);" ng-click="global.board.toggleSelector(boxCol, boxRow, $event); global.board.logBoxDetails(boxCol, boxRow, $event);")
-					div(class="number-picker" ng-show="global.board.isSelectorActive(boxCol, boxRow)")
-						div(ng-repeat = "number in [1,2,3,4,5,6,7,8,9]" ng-class="'number value'+number" ng-click="global.board.setBoxValue(boxCol, boxRow, number);" ng-show="global.board.isPossibleValue(boxCol, boxRow, number) || !(global.board.getHintMode())") {{number}}
-						div(class="number clearNumber" ng-click="global.board.clearBoxValue(boxCol, boxRow)") X
+					div(class="number-picker" ng-show="global.board.isSelectorActive(boxCol, boxRow)") 
+						div(class="value") {{global.board.getBoxValue(boxCol, boxRow)}}
+						a(ng-repeat = "number in [1,2,3,4,5,6,7,8,9]" ng-class="'number value'+number" ng-click="global.board.setBoxValue(boxCol, boxRow, number);" ng-show="global.board.isPossibleValue(boxCol, boxRow, number) || !(global.board.getHintMode())") {{number}}
+						a(class="number clearNumber" ng-click="global.board.clearBoxValue(boxCol, boxRow)") X
 					div(class="value") {{global.board.getBoxValue(boxCol, boxRow)}}
 		
 		ul(class='sudoku-board-buttons')

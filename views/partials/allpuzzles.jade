@@ -1,7 +1,10 @@
 main(ng-cloak ng-controller="PuzzleListController as puzzleList")
 	div(class="allPuzzles")
-		ul
-			li(ng-repeat="puzzle in puzzleList.puzzles") 
-				p(ng-repeat="prop in puzzle")
-					{{prop}}
-
+		div(class="puzzleCard" ng-repeat="puzzle in puzzleList.puzzles")
+			div(class="cardRow")
+				div(class="imgContainer")
+					img(class="cardCell" ng-src="{{puzzle.imageUrl}}")
+				div(class="contentContainer") 
+					div(class="puzzleTitle") {{puzzle.name}}
+					div(class="puzzleDescription") {{puzzle.description}}
+			a(class="cardRow" ng-href="/#/puzzles/{{puzzle.puzzleId}}") Try this puzzle!

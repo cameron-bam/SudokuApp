@@ -41,14 +41,7 @@
 	// controller for Welcome Page
 	app.controller('WelcomePageController', function() {
 		
-		var newPuzzleToday = false;
-
-		if (newPuzzleToday) {
-				this.puzzleMessage = "There's a new puzzle today!  Go checkout the featured puzzle page.";
-			} 
-		else {
-				this.puzzleMessage = "No new puzzles today.  Check again tomorrow!";
-			}
+		this.puzzleMessage="Welcome to the sudoku app!  Go check out the all puzzles page!"
 	});
 
 
