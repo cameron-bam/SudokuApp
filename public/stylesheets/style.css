@@ -88,8 +88,7 @@ nav ul li div.navButtonBackground {
 	border: 0;
 	margin: 0;
 	opacity: 0;
-	background: linear-gradient(0deg, #DD4814, #E77E5A);
-	box-shadow: 1px 1px #2C001E;
+	background: #DD4814;
 	transition: opacity 0.15s;
 }
 
@@ -104,7 +103,6 @@ nav ul li p {
 	background: rgba(0,0,0,0);
 	color: #F2F1F0;
 	pointer-events: none;
-	text-shadow: 1px 1px #2C001E;
 }
 
 nav ul li div.navButtonBackground:hover {
@@ -154,7 +152,7 @@ main div.allPuzzles .cardRow {
 }
 
 main div.allPuzzles div.cardRow {
-	background: linear-gradient(0deg, #77216F, #9F639A);
+	background: #77216F;
 	border-top-right-radius: 0.333333em;
 	border-top-left-radius: 0.333333em;
 }
@@ -176,23 +174,22 @@ main div.allPuzzles div.puzzleCard div.imgContainer img {
 }
 
 main div.allPuzzles div.puzzleCard div.contentContainer {
-	padding-top: 2.5%;
-	padding-bottom: 2.5%;
+	padding: 0;
 	margin: 0;
 	border: 0;
 	overflow: hidden;
-	text-shadow: 1px 1px #2C001E;
 	color: #F2F1F0;
 }
 
 main div.allPuzzles div.puzzleCard div.contentContainer div.puzzleTitle {
 	width: 100%;
-	font-size: 1.3em;
+	padding-top: 0.25em;
+	font-size: 2em;
 }
 
 main div.allPuzzles div.puzzleCard div.contentContainer div.puzzleDescription {
 	width: 100%;
-	padding-top: 0.5em;
+	padding-top: 1em;
 }
 
 
@@ -203,11 +200,18 @@ main div.allPuzzles div.puzzleCard a.cardRow {
 	z-index: -1;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
-	background: linear-gradient(0deg, #DD4814, #E77E5A);
+	background: #DD4814;
 	border-bottom-left-radius: 0.333333em;
 	border-bottom-right-radius: 0.333333em;
 	color: #F2F1F0;
-	text-shadow: 1px 1px #2C001E;
+}
+
+main div.allPuzzles div.puzzleCard a.cardRow:hover {
+	background: #E77E5A;
+}
+
+main div.allPuzzles div.puzzleCard a.cardRow:active {
+	background: #DD4814;
 }
 
 
@@ -251,7 +255,6 @@ table.sudoku-board td {
 	position: relative;
 	overflow: visible;
 	text-align: center;
-	transition: background-color 0.1s, text-shadow 0.1s, color 0.1s;
 }
 
 ul.sudoku-board-buttons {
@@ -262,9 +265,26 @@ ul.sudoku-board-buttons {
 	font-size: 1em;
 }
 
-ul.sudoku-board-buttons li {
+ul.sudoku-board-buttons li.boardButton {
+	text-decoration: none;
+	text-align: center;
 	display: inline-block;
-	padding: 0.333333em;
+	padding: 0.75em;
+	margin: 0.5em;
+	border-radius: 0.5em;
+	z-index: 1;
+	background: #DD4814;
+	color: #F2F1F0;
+}
+
+ul.sudoku-board-buttons li.boardButton:hover {
+	cursor: pointer;
+	background: #E77E5A;
+}
+
+ul.sudoku-board-buttons li.boardButton:active {
+	background: #DD4814;
+	box-shadow: none;
 }
 
 
@@ -279,6 +299,19 @@ div.color-key-container {
 	right: 0;
 	margin-top: 1em;
 	margin-bottom: 1em;
+	opacity: 1;
+}
+
+div.color-key-container.ng-hide-add, div.color-key-container.ng-hide-remove {
+	transition: opacity 0.2s;
+}
+
+td.invalid-box-value-add, td.invalid-box-value-remove, {
+	transition: background-color 0.2s;
+}
+
+div.color-key-container.ng-hide {
+	opacity: 0;
 }
 
 div.color-key-container div.color-key-title {
@@ -303,13 +336,17 @@ table.sudoku-board td:nth-child(3n+1) {
 	border-left: 2px solid;
 }
 
-
-td.invalid-box-value, table.color-key tr.invalid-box-value td.color-column div.color{
-	background-color: rgb(255, 0, 0);
+td.sudoku-region {
+	transition: background-color 0.2s;
 }
 
-td.one-possible-box-value,  table.color-key tr.one-possible-box-value td.color-column div.color{
-	background-color: rgb(0, 255, 0);
+
+td.sudoku-region.invalid-box-value, table.color-key tr.invalid-box-value td.color-column div.color{
+	background-color: rgb(177, 0, 0);
+}
+
+td.sudoku-region.one-possible-box-value,  table.color-key tr.one-possible-box-value td.color-column div.color{
+	background-color: rgb(0, 139, 0);
 }
 
 table.color-key tr.invalid-box-value td.color-column, table.color-key tr.one-possible-box-value td.color-column {
@@ -340,7 +377,6 @@ table.color-key tr.invalid-box-value td.description-column, table.color-key tr.o
 table.sudoku-board td:hover {
 	background-color: #924D8B;
 	color: #F2F1F0;
-	text-shadow: 1px 1px #2C001E;
 	border-color: #2C001E;
 	cursor: pointer;
 }
@@ -354,14 +390,25 @@ div.value {
 div.number-picker {
 	position: absolute;
 	display: block;
-	background: linear-gradient(0deg, #77216F, #9F639A);
+	background: #77216F;
 	top: -25%;
 	left: -25%;
 	width: 150%;
 	height: 150%;
 	border-radius: 50%;
 	z-index: 99;
+	opacity: 1;
 	color: #F2F1F0;
+	transform: scale(1);
+}
+
+div.number-picker.ng-hide-add, div.number-picker.ng-hide-remove {
+	transition: opacity 0.1s, transform 0.1s ease;
+}
+
+div.number-picker.ng-hide {
+	opacity: 0;
+	transform: scale(0.5);
 }
 
 div.number-picker:hover{
@@ -385,11 +432,15 @@ div.number-picker a.number,  div.number-picker div.value{
 }
 
 div.number-picker a.number {
-	text-shadow: none;
+	opacity: 1;
 }
 
-div.number-picker div.value{
-	text-shadow: 1px 1px #2C001E;
+div.number-picker a.number.ng-hide-add, div.number-picker a.number.ng-hide-remove {
+	transition: opacity 0.2s;
+}
+
+div.number-picker a.number.ng-hide {
+	opacity: 0;
 }
 
 div.number-picker a.number {
@@ -400,7 +451,6 @@ div.number-picker a.number {
 
 div.number-picker a.number:hover{
 	background-color: #E77E5A;
-	text-shadow: 1px 1px #2C001E;
 	cursor: pointer;
 }
 

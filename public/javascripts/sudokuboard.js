@@ -399,8 +399,9 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 		};
 
 		/* used to control user aids on the board */
-		this.toggleHintMode = function () {
+		this.toggleHintMode = function ($event) {
 			hintMode = !hintMode;
+			$event.stopPropagation();
 		};
 
 		/* used to access hint mode from the view */

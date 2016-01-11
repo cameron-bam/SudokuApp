@@ -10,14 +10,10 @@ main
 					div(class="value") {{global.board.getBoxValue(boxCol, boxRow)}}
 		
 		ul(class='sudoku-board-buttons')
-			li
-				button(name="boardReset" ng-click="global.board.resetBoard();") Reset
-			li
-				button(name="boardSubmit") Submit
-			li
-				button(name="solveBoard" ng-click="global.board.attemptToSolve();") Solve
-			li
-				button(name="toggleHintMode" ng-click="global.board.toggleHintMode();") {{global.board.getHintButtonText();}}
+			li(class="boardButton" name="boardReset" ng-click="global.board.resetBoard();") Reset
+			li(class="boardButton" name="boardSubmit") Submit
+			li(class="boardButton" name="solveBoard" ng-click="global.board.attemptToSolve();") Solve
+			li(class="boardButton" name="toggleHintMode" ng-click="global.board.toggleHintMode($event);") {{global.board.getHintButtonText();}}
 		div(class="color-key-container" ng-show="global.board.getHintMode();")
 			div(class="color-key-title") Color Key
 			table(class="color-key")

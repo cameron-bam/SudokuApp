@@ -1,6 +1,6 @@
 (function() {
 	
-	var app = angular.module('SudokuApp', ['sudokuboard', 'puzzlelist', 'ngRoute']);
+	var app = angular.module('SudokuApp', ['sudokuboard', 'puzzlelist', 'ngRoute', 'ngAnimate']);
 
 	app.config(['$routeProvider',
 	function($routeProvider) {
