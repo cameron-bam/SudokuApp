@@ -291,15 +291,18 @@ ul.sudoku-board-buttons li.boardButton:active {
 div.color-key-container {
 	width: 50%;
 	padding: 1%;
-	border: 1px solid;
+	border: none;
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
 	left: 0;
 	right: 0;
 	margin-top: 1em;
+	background: #77216F;
+	color: #F2F1F0;
 	margin-bottom: 1em;
 	opacity: 1;
+	border-radius: 0.5em;
 }
 
 div.color-key-container.ng-hide-add, div.color-key-container.ng-hide-remove {
@@ -318,6 +321,7 @@ div.color-key-container div.color-key-title {
 	width: 100%;
 	text-align: center;
 	padding: 0;
+	border: none;
 }
 
 table.color-key {
