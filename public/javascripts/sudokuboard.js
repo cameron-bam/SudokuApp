@@ -373,14 +373,33 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 
 		/* uses previously defined dfs algorithm to solve the puzzle, alerts users if there is no solution */
 		this.attemptToSolve = function() {
-			var isSolved = this.solvePuzzle();
 
-			if (isSolved) {
-				alert('The puzzle was solved!');
-			} else {
-				alert('Could not solve the puzzle with the current board!');
+			// validate that the puzzle is solvable
+			var isPuzzleValid = true;
+
+
+			for (var i = 0; i < dim; i++) {
+				for (var j = 0; j < dim; j++){
+					if (((boardContents[i][j] !== initialBoxVal) && !this.isPartOfPuzzle(i,j) && !this.isBoxValueValid(i, j)) ||  ((boardContents[i][j].possibleValues.length === 0) && (boardContents[i][j].val === initialBoxVal))) {
+							isPuzzleValid = false;
+					}
+				}
 			}
 
+			if (!isPuzzleValid) {
+				alert('This puzzle cannot be solved!  Hint mode has been activated');
+				hintMode = true;
+			} else {
+				var isSolved = this.solvePuzzle();
+
+				if (isSolved) {
+					alert('The puzzle was solved!');
+				} else {
+					alert('Could not solve the puzzle with the current board!');
+				}		
+			}
+
+			
 		};
 
 		/* erases all user changes to a puzzle, while preserving the original prompt */
@@ -401,7 +420,9 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 		/* used to control user aids on the board */
 		this.toggleHintMode = function ($event) {
 			hintMode = !hintMode;
-			$event.stopPropagation();
+			if (typeof $event !== "undefined") {
+				$event.stopPropagation();
+			}
 		};
 
 		/* used to access hint mode from the view */
