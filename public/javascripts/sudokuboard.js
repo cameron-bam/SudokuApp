@@ -19,6 +19,8 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 		var initialBoxVal = ' ';
 		var recursiveDepth = 0;
 		var hintMode = false;
+		var puzzleId;
+		var displaySaveBox = false;
 
 		/* create the board data and store it in boardContents */
 		var make =  function (dim, lvl, arr, coord) {
@@ -455,17 +457,47 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			return cssClass;
 		};
 
-		/* returns a promise used to load a new puzzle from a json object stored on the server */
-		this.setBoard = function(puzzleId) {
+		this.isSaveBoxActive = function() {
+			return displaySaveBox;
+		}
 
-			return $http({
+		this.closeSaveBox = function() {
+			displaySaveBox = false;
+		}
+
+		this.openSaveBox = function() {
+			displaySaveBox = true;
+		}
+
+		this.inEditMode = function() {
+			if (puzzleId === 'createPuzzle') {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		/* returns a promise used to load a new puzzle from a json object stored on the server */
+		this.setBoard = function(newPuzzleId) {
+
+			if(newPuzzleId === 'createPuzzle') {
+
+				boardContents = make(dim, level);
+				puzzleId =  newPuzzleId;
+				hintMode = false;
+
+			} else {
+
+				return $http({
 				  method: 'GET',
-				  url: '/puzzles/getboard/' + puzzleId,
+				  url: '/puzzles/getboard/' + newPuzzleId,
 				}).then(function successCallback(response) {
 
 					  hintMode = false;
 					  
 					  boardContents = make(dim, level);
+
+					  puzzleId = newPuzzleId;
 
 					  for (var col in response.data) {
 					  	if (response.data.hasOwnProperty(col)) {
@@ -481,6 +513,10 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 	  			}, function errorCallback(response) {
 	  				alert("Could not retreive puzzle!")
 	  			});
+
+			}
+
+			
 		};
 		
 

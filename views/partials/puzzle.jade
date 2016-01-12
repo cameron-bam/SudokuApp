@@ -8,12 +8,16 @@ main
 						a(ng-repeat = "number in [1,2,3,4,5,6,7,8,9]" ng-class="'number value'+number" ng-click="global.board.setBoxValue(boxCol, boxRow, number);" ng-show="global.board.isPossibleValue(boxCol, boxRow, number) || !(global.board.getHintMode())") {{number}}
 						a(class="number clearNumber" ng-click="global.board.clearBoxValue(boxCol, boxRow)") X
 					div(class="value") {{global.board.getBoxValue(boxCol, boxRow)}}
-		
+		div(class="saveBox" ng-show="global.board.isSaveBoxActive()")
+			div(class="saveFields")
+			div(class="saveActions")
+				ul(class="saveButtons")
+					li(class="cancel" ng-click="global.board.closeSaveBox()") Cancel
 		ul(class='sudoku-board-buttons')
 			li(class="boardButton" name="boardReset" ng-click="global.board.resetBoard();") Reset
-			li(class="boardButton" name="boardSubmit") Submit
 			li(class="boardButton" name="solveBoard" ng-click="global.board.attemptToSolve();") Solve
 			li(class="boardButton" name="toggleHintMode" ng-click="global.board.toggleHintMode($event);") {{global.board.getHintButtonText();}}
+			li(class="boardButton" name="boardSubmit" ng-show="global.board.inEditMode()" ng-click="global.board.openSaveBox()") Save
 		div(class="color-key-container" ng-show="global.board.getHintMode();")
 			div(class="color-key-title") Color Key
 			table(class="color-key")
@@ -25,3 +29,4 @@ main
 					td(class="color-column")
 						div(class="color")
 					td(class="description-column") There's only one possible value for this box!  Try filling it in.
+	

@@ -76,8 +76,8 @@ nav ul li a.allPuzzles {
 	width: 6em;
 }
 
-nav ul li a.featuredPuzzle {
-	width: 9em;
+nav ul li a.createPuzzle {
+	width: 7em;
 }
 
 nav ul li div.navButtonBackground {
@@ -234,9 +234,37 @@ div.sudoku-container {
 	height: 100%;
 }
 
+div.saveBox {
+	position: absolute;
+	background-color: #77216F;
+	width: 50%;
+	height: 15%;
+	min-height: 50px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	top: 50%;
+}
+
+div.saveBox ul.saveButtons {
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+	height: 100%;
+}
+
+div.saveBox ul.saveButtons li {
+	display: inline;
+	margin: 0.5em;
+	border: 0;
+	padding: 0.5em;
+	background: #DD4814;
+	color: #F2F1F0;
+}
 
 table.sudoku-board {
 	border-collapse: collapse;
+	position: relative;
 	border: 2px solid;
 	margin: 0px;
 	padding: 0px;
