@@ -15,4 +15,18 @@ router.get('/getpuzzlelist', function(req, res) {
 	res.json(puzzleReader.getAllPuzzleInfo());
 });
 
+router.post('/saveNewPuzzle', function(req, res) {
+
+	try {
+		puzzleReader.createNewPuzzle(req.body);
+		res.send('Saved the puzzle successfully!');
+	} 
+	catch (err) {
+		res.send("Couldn''t save the puzzle!");
+	}
+
+
+	
+});
+
 module.exports = router;

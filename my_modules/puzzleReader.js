@@ -1,4 +1,5 @@
 var fs = require('fs');
+var mkdirp = require('mkdirp');
 
 var readPuzzleFromFile = function(puzzleId) {
 
@@ -31,4 +32,33 @@ var getAllPuzzleInfo = function() {
 	return listOfPuzzles;
 };
 
-module.exports = {"readPuzzleFromFile": readPuzzleFromFile, "getAllPuzzleInfo": getAllPuzzleInfo};
+var createNewPuzzle = function(puzzleData) {
+
+	var puzzleDirs = fs.readdirSync('./puzzles');
+	var maxDir = 0;
+	var currentDir = '';
+
+	for (var dirName in puzzleDirs) {
+		currentDir = parseInt(dirName);
+		if ((currentDir !== 'NaN') && (currentDir >= maxDir)) {
+			maxDir = currentDir;
+		}
+	}
+
+	var newPuzzleId = maxDir + 1;
+	var newPuzzleDir = './puzzles/' + newPuzzleId;
+
+	mkdirp(newPuzzleDir, function(err) {
+		if (err) throw err;
+	});
+
+	fs.writeFile(newPuzzleDir + '/puzzle.json', JSON.stringify(puzzleData), function(err) {
+		if (err) throw err;
+	})
+}
+
+module.exports = {
+					"readPuzzleFromFile": readPuzzleFromFile, 
+					"getAllPuzzleInfo": getAllPuzzleInfo,
+					"createNewPuzzle": createNewPuzzle
+				};

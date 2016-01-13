@@ -457,6 +457,18 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			return cssClass;
 		};
 
+		this.getCurrentBoard = function(){
+			var board = make(dim, level);
+
+			for (var i = 0; i < dim; i++) {
+				for (var j = 0; j < dim; j++) {
+					board[i][j] = this.getBoxValue(i,j);
+				}
+			}
+
+			return board;
+		}
+
 		this.isSaveBoxActive = function() {
 			return displaySaveBox;
 		}

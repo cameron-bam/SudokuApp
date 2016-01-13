@@ -1,6 +1,5 @@
 {"board": [["","",9,"","","","","",""],["",8,"","","","","","",""],["","",7,"","","","","",""],["","","",6,"","","","",""],["","","","",5,"","","",""],["","","","","",4,"","",""],["","","","","","",3,"",""],["","","","","","","",2,""],["","","","","","","","",1]],
  "puzzleInfo": {
  	"name": "El Diablo",
- 	"imageUrl": "http://i.imgur.com/9Em4CCf.png?1",
- 	"description": "Many a sudoku enthusiast have gotten lost in this puzzle's fiery depths..."
+ 	"difficulty": "Fiery"
  	}}

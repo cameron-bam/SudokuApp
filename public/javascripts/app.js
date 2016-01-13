@@ -53,4 +53,24 @@
 			
 		});
 
+	app.controller('SavePuzzleController', 
+		function($http, $scope, sudokuBoardFactory) {
+
+			this.saveBoard = function(currentBoard) {
+				$http({
+				  method: 'post',
+				  data: {
+					  	'puzzleInfo': $scope.saveBox.puzzleInfo,
+					  	'board': currentBoard
+				  		},
+				  url: '/puzzles/saveNewPuzzle'
+				}).then(function successCallBack() {
+					alert($scope.saveBox.puzzleInfo.puzzleName + ' was saved successfully.');
+				}, function errorCallBack() {
+					alert($scope.saveBox.puzzleInfo.puzzleName + ' could not be saved!');
+				} );
+			};
+
+		});
+
 })();

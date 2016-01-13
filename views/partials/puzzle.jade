@@ -8,11 +8,6 @@ main
 						a(ng-repeat = "number in [1,2,3,4,5,6,7,8,9]" ng-class="'number value'+number" ng-click="global.board.setBoxValue(boxCol, boxRow, number);" ng-show="global.board.isPossibleValue(boxCol, boxRow, number) || !(global.board.getHintMode())") {{number}}
 						a(class="number clearNumber" ng-click="global.board.clearBoxValue(boxCol, boxRow)") X
 					div(class="value") {{global.board.getBoxValue(boxCol, boxRow)}}
-		div(class="saveBox" ng-show="global.board.isSaveBoxActive()")
-			div(class="saveFields")
-			div(class="saveActions")
-				ul(class="saveButtons")
-					li(class="cancel" ng-click="global.board.closeSaveBox()") Cancel
 		ul(class='sudoku-board-buttons')
 			li(class="boardButton" name="boardReset" ng-click="global.board.resetBoard();") Reset
 			li(class="boardButton" name="solveBoard" ng-click="global.board.attemptToSolve();") Solve
@@ -29,4 +24,18 @@ main
 					td(class="color-column")
 						div(class="color")
 					td(class="description-column") There's only one possible value for this box!  Try filling it in.
+	div(class="save-box-overlay" ng-show="global.board.isSaveBoxActive()")
+		div(class="saveBox" ng-controller="SavePuzzleController as saveBox")
+			div(class="saveForm")
+				div(class="formTitle") Save This Puzzle
+				div(class="saveField")
+					p Name:
+					input(type="text" maxlength="15" ng-model="saveBox.puzzleInfo.name")
+				div(class="saveField")
+					p	Difficulty:
+					textarea(rows="4" cols="20" maxlength="74" ng-model="saveBox.puzzleInfo.difficulty")
+			div(class="saveActions")
+				ul(class="saveButtons")
+					li(class="save" ng-click="saveBox.saveBoard(global.board.getCurrentBoard())") Save
+					li(class="cancel" ng-click="global.board.closeSaveBox()") Cancel
 	
