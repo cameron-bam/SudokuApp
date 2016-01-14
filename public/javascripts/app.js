@@ -15,6 +15,8 @@
 		}).when('/index', {
 			templateUrl: '/partials/index',
 			controller: 'WelcomePageController'
+		}).when('/about', {
+			templateUrl: '/partials/about'
 		}).when('/puzzles/:puzzleId', {
 			templateUrl: 'partials/puzzle',
 			resolve: {
@@ -54,7 +56,7 @@
 		});
 
 	app.controller('SavePuzzleController', 
-		function($http, $scope, sudokuBoardFactory) {
+		function($http, $scope, $location, sudokuBoardFactory) {
 
 			this.saveBoard = function(currentBoard) {
 				$http({
@@ -64,10 +66,12 @@
 					  	'board': currentBoard
 				  		},
 				  url: '/puzzles/saveNewPuzzle'
-				}).then(function successCallBack() {
-					alert($scope.saveBox.puzzleInfo.puzzleName + ' was saved successfully.');
-				}, function errorCallBack() {
-					alert($scope.saveBox.puzzleInfo.puzzleName + ' could not be saved!');
+				}).then(function successCallBack(response) {
+					alert($scope.saveBox.puzzleInfo.name + ' was saved successfully.');
+					console.log('newPuzzleId: ' + response.data.newPuzzleId);
+					$location.path('/puzzles/' + response.data.newPuzzleId);
+				}, function errorCallBack(response) {
+					alert($scope.saveBox.puzzleInfo.name + ' could not be saved!');
 				} );
 			};
 

@@ -10,17 +10,11 @@ html(ng-app="SudokuApp" ng-controller="GlobalController as global" ng-click="glo
 			nav
 				ul
 					li
-						a(class="navButton Home" href='/#/index')
-							div(class="navButtonBackground")
-							p Home
+						a(class="navButton" href='/#/about') About
 					li
-						a(class="navButton allPuzzles" href='/#/allpuzzles')
-							div(class="navButtonBackground")
-							p All Puzzles
+						a(class="navButton" href='/#/allpuzzles') All Puzzles
 					li
-						a(class="navButton createPuzzle" href='/#/puzzles/createPuzzle')
-							div(class="navButtonBackground")
-							p Create Puzzle
+						a(class="navButton" href='/#/puzzles/createPuzzle') Create Puzzle
 		ng-view
 		script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js')
 		script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js')

@@ -8,7 +8,7 @@ router.param('puzzleId', function(req,res,next,puzzleId) {
 });
 
 router.get('/getboard/:puzzleId', function(req, res) {
-	res.json(puzzleReader.readPuzzleFromFile(req.puzzleId).board);
+	res.json(puzzleReader.readPuzzleFromFile(req.puzzleId));
 });
 
 router.get('/getpuzzlelist', function(req, res) {
@@ -18,8 +18,7 @@ router.get('/getpuzzlelist', function(req, res) {
 router.post('/saveNewPuzzle', function(req, res) {
 
 	try {
-		puzzleReader.createNewPuzzle(req.body);
-		res.send('Saved the puzzle successfully!');
+		res.json(puzzleReader.createNewPuzzle(req.body));
 	} 
 	catch (err) {
 		res.send("Couldn''t save the puzzle!");

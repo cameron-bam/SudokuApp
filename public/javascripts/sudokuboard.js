@@ -21,6 +21,8 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 		var hintMode = false;
 		var puzzleId;
 		var displaySaveBox = false;
+		var mode = 'attempt';
+		var puzzleInfo = {};
 
 		/* create the board data and store it in boardContents */
 		var make =  function (dim, lvl, arr, coord) {
@@ -274,6 +276,8 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			}
 		};
 
+
+
 		/* used to activate/deactivate the number selector on an individual box */
 		this.toggleSelector = function (boxCol, boxRow, clickEvent) {
 
@@ -469,6 +473,10 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			return board;
 		}
 
+		this.getPuzzleName = function(){
+			return puzzleInfo.name;
+		}
+
 		this.isSaveBoxActive = function() {
 			return displaySaveBox;
 		}
@@ -481,51 +489,51 @@ angular.module('sudokuboard', []).factory('sudokuBoardFactory',['$http', functio
 			displaySaveBox = true;
 		}
 
-		this.inEditMode = function() {
-			if (puzzleId === 'createPuzzle') {
-				return true;
-			} else {
-				return false;
-			}
+		this.getMode = function() {
+			return mode;
 		}
 
 		/* returns a promise used to load a new puzzle from a json object stored on the server */
 		this.setBoard = function(newPuzzleId) {
+			
+			hintMode = false;
+			this.closeSaveBox();
+			boardContents = make(dim, level);
+			puzzleInfo = {};
 
-			if(newPuzzleId === 'createPuzzle') {
 
-				boardContents = make(dim, level);
-				puzzleId =  newPuzzleId;
-				hintMode = false;
-
-			} else {
+			if(newPuzzleId !== 'createPuzzle') {
 
 				return $http({
 				  method: 'GET',
 				  url: '/puzzles/getboard/' + newPuzzleId,
 				}).then(function successCallback(response) {
 
-					  hintMode = false;
-					  
-					  boardContents = make(dim, level);
+					mode = 'attempt';
+					puzzleInfo = response.data.puzzleInfo;
+					puzzleInfo.puzzleId = newPuzzleId;
 
-					  puzzleId = newPuzzleId;
+					for (var col in response.data.board) {
+						if (response.data.board.hasOwnProperty(col)) {
+							var rows = response.data.board[col];
+							for (var row in rows){
+								if (rows.hasOwnProperty(row) && isValidNumber(rows[row])) {
+									setPuzzlePrompt(col, row, parseInt(rows[row]));
+								}
+							}
+						}
+					}
 
-					  for (var col in response.data) {
-					  	if (response.data.hasOwnProperty(col)) {
-					  		var rows = response.data[col];
-					  		for (var row in rows){
-					  			if (rows.hasOwnProperty(row) && isValidNumber(rows[row])) {
-					  				setPuzzlePrompt(col, row, parseInt(rows[row]));
-					  			}
-					  		}
-					  	}
-					  }
+					console.log(puzzleInfo);
 
 	  			}, function errorCallback(response) {
 	  				alert("Could not retreive puzzle!")
 	  			});
 
+			} else {
+				puzzleInfo.puzzleId = newPuzzleId;
+				puzzleInfo.name = 'Create New Puzzle'
+				mode = 'create';
 			}
 
 			

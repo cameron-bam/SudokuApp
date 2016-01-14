@@ -1,5 +1,6 @@
 main
 	div(class="sudoku-container" ng-cloak)
+		h2(class="puzzle-name") {{global.board.getPuzzleName()}}
 		table(class="sudoku-board")
 			tr(ng-repeat = "boxRow in [0,1,2,3,4,5,6,7,8]")
 				td(ng-repeat = "boxCol in [0,1,2,3,4,5,6,7,8]" ng-class="'sudoku-region ' + global.board.getBoxCssClass(boxCol, boxRow);" ng-click="global.board.toggleSelector(boxCol, boxRow, $event); global.board.logBoxDetails(boxCol, boxRow, $event);")
@@ -12,7 +13,7 @@ main
 			li(class="boardButton" name="boardReset" ng-click="global.board.resetBoard();") Reset
 			li(class="boardButton" name="solveBoard" ng-click="global.board.attemptToSolve();") Solve
 			li(class="boardButton" name="toggleHintMode" ng-click="global.board.toggleHintMode($event);") {{global.board.getHintButtonText();}}
-			li(class="boardButton" name="boardSubmit" ng-show="global.board.inEditMode()" ng-click="global.board.openSaveBox()") Save
+			li(class="boardButton" name="boardSubmit" ng-show="(global.board.getMode() === 'create')" ng-click="global.board.openSaveBox()") Save
 		div(class="color-key-container" ng-show="global.board.getHintMode();")
 			div(class="color-key-title") Color Key
 			table(class="color-key")

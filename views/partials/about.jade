@@ -1,0 +1,64 @@
+main
+	div(class="about-content")
+		h3(class="section-header") How to Play Sudoku
+		p Sudoku is a logic-based puzzle, where the object is to fill out each square on a 9x9 grid with a number between 1 and 9 such that:
+			ul
+				li Each row of the 9 x 9 grid contains all of the digits between 1 and 9
+				li Each column of the 9 x 9 contains all of the digits between 1 and 9
+				li Each 3 x 3 sub-grid contains all of the digits between 1 and 9
+		h3(class="section-header") History of Sudoku
+		p Conceptually, the origins of Sudoku puzzles can be found in combinatorial mathematics.  A 
+			|	 completed puzzle is a special kind of latin square, which as 
+			a(href="https://en.wikipedia.org/wiki/Latin_square") can be defined
+			|	as an 
+			em	n x n array 
+			|	filled with 
+			em	n
+			|	 different symbols, each occuring exactly once in each row and exactly once in each column.
+			|	 Latin squares were notably 
+			a(href="http://eulerarchive.maa.org/pages/E530.html") described by mathematician Leonhard Euler in 1782
+			|	 and by 
+			a(href="http://www.maa.org/press/periodicals/convergence/euler-squares-introduction") others 
+			|	 in the years since then.
+		p The name "Sudoku"  
+			a(href="http://www.merriam-webster.com/dictionary/sudoku") originates
+			|	 from the abbreviation of the Japanese words 
+			em sūji wa dokushin ni kagiru,
+			|	 which mean "the numerals must remain single" (as opposed to double, or double digit).
+			|	  Maki Kaji coined the term in 1984, when he 
+			a(href="http://www.nytimes.com/2007/03/21/business/worldbusiness/21sudoku.html?_r=0") first published the modern version of the puzzle
+			|	  in a magazine owned by his publication company, Nikoli.
+		p Up until 2004, Sudoku remained relatively unknown to the world outside of Japan.  That year,
+			|	 Wayne Gould, a retired judge and lawyer from New Zealand, convinced 
+			em	The Times
+			|	 of London to run a Sudoku puzzle.  The paper saw an increase in sales, which inspired 
+			|	 other publications to run the puzzle as well.  A little over two years later, the puzzles were being published 
+			a(href="http://nymag.com/arts/all/features/17244/index1.html") across the globe.
+		h3(class="section-header") About Express Sudoku
+		p This app allows users to create a Sudoku puzzle, save the puzzle to the server hosting this app,
+			|	 and then load the puzzle again from the All Puzzles page. Users can attempt to solve 
+			|	 these puzzles themselves, or they can use the page's puzzle solving feature to find a
+			|	 solution.  If the user wants to solve the puzzle themselves, but ends up getting stuck,
+			|	 there is a hint mode on the board that will reveal the following information:
+			ul
+				li Whether one of the filled in numbers breaks the rules of sudoku
+				li If an empty box can't be filled in based on the other values of boxes on the board(could be caused by a poor puzzle prompt)
+				li If an empty box has only one possible value based on the values of the other boxes on the board
+		h3(class="section-header") Implementation  
+		p The entire stack of Express Sudoku is written in Javascript.  The client-side app uses the 
+			|	 AngularJS framework, while the server-side app uses the Express framework for Node.js.
+			|	 Puzzles are saved to flat-files, so there is no database invovled.  This allows all of 
+			|	 the source code to be stored in a GitHub repository.  Sudoku puzzles are solved by using
+			|	 a recursive DFS algorithm.  The steps are:
+			ol
+				li Start at the first empty box on the grid, fill in the box with a possible value
+				li Update the possible values of the other boxes on the grid
+				li Move to the next empty square, and repeat the previous two steps
+				li If no possible values exist for an empty box, or all possible values for a box have been exhausted, return to the box that was previously filled in and choose another possible value
+		h3(class="section-sub-header") About the Author
+		p My name is Cameron White, and I currently reside in Boulder, Colorado.  I'm an avid outdoor 
+			|	 enthusiast and enjoy skiing, hiking, and tennis.  When I'm not outside I like to spend my 
+			|	 time coding and learning new technologies.  You can contact me at 
+			a(href="mailto:cameronwhite16@gmail.com") cameronwhite16@gmail.com
+			|	 or via my 
+			a(href="https://www.linkedin.com/in/cameron-white-96357033") LinkedIn profile.

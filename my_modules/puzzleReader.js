@@ -20,7 +20,6 @@ var getAllPuzzleInfo = function() {
 	for (var puzzleId in puzzleIds) {
 		if (puzzleIds.hasOwnProperty(puzzleId)) {
 			curPuzzleId = puzzleIds[puzzleId];
-			console.log('puzzleId: ' + puzzleId + ', puzzleIds[puzzleId]: ' + puzzleIds[puzzleId] + ', curPuzzleId: ' + curPuzzleId);
 			curPuzzleInfo = readPuzzleFromFile(curPuzzleId).puzzleInfo;
 			curPuzzleInfo.puzzleId = curPuzzleId;
 			listOfPuzzles.push(curPuzzleInfo);
@@ -55,6 +54,8 @@ var createNewPuzzle = function(puzzleData) {
 	fs.writeFile(newPuzzleDir + '/puzzle.json', JSON.stringify(puzzleData), function(err) {
 		if (err) throw err;
 	})
+
+	return {'newPuzzleId': newPuzzleId};
 }
 
 module.exports = {

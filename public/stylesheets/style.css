@@ -59,66 +59,48 @@ nav ul li {
 
 nav ul li a.navButton {
 	text-decoration: none;
+	text-align: center;
 	display: inline-block;
 	position: relative;
-	padding: 0.666667em;
-	height: 2.5em;
-	margin: 0;
-	padding: 0;
-	z-index: 1;
-}
-
-/* width controlled individually b/c button contents are absolutely positioned */
-
-nav ul li a.Home {
-	width: 4em;
-}
-
-nav ul li a.allPuzzles {
-	width: 6em;
-}
-
-nav ul li a.createPuzzle {
-	width: 7em;
-}
-
-nav ul li div.navButtonBackground {
-	position: absolute;
-	height: 100%;
-	width: 100%;
 	border-radius: 0.333333em;
-	border: 0;
-	margin: 0;
-	opacity: 0;
-	background: #DD4814;
-	transition: opacity 0.15s;
-}
-
-nav ul li p {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	line-height: 2.5em; /* match height of nav button */
-	margin: 0;
-	border: 0;
-	text-align: center;
-	background: rgba(0,0,0,0);
 	color: #F2F1F0;
-	pointer-events: none;
+	margin: 0;
+	padding: 0.75em;
+	z-index: 1;
+	background-color: rgba(0,0,0,0);
+	transition: background-color 0.15s;
 }
 
-nav ul li div.navButtonBackground:hover {
-	opacity: 1;
+nav ul li a.navButton:hover {
+	background-color: rgba(221,72,20,1);
 }
 
-nav ul li div.navButtonBackground:active, main div.allPuzzles div.puzzleCard a.cardRow:active {
-	box-shadow: none;
+nav ul li a.navButton:active {
+	background-color: #E77E5A;
+	transition: none;
+}
+
+main div.allPuzzles div.puzzleCard a.cardRow:active {
 	background: linear-gradient(0deg, #C42F00, #C74112);
 }
 
 main {
 	width: 100%;
 	height: 100%;
+}
+
+main div.about-content {
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+div.about-content ul {
+	padding-left: 25px;
+}
+
+div.about-content ul li {
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
 }
 
 main div.Welcome, main div.allPuzzles {
@@ -209,7 +191,7 @@ div.sudoku-container {
 	position: absolute;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 3.5em;
+	margin-top: 0;
 	left: 0;
 	right: 0;
 	width: 473px;
@@ -307,6 +289,10 @@ div.saveBox ul.saveButtons li:hover {
 div.saveBox ul.saveButtons li:active {
 	cursor: pointer;
 	background-color: #DD4814;
+}
+
+h2.puzzle-name {
+	text-align: center;
 }
 
 table.sudoku-board {
