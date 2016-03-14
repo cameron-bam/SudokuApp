@@ -8,5 +8,6 @@ app uses ExpressJS.
 2.  Download the zip for this repository: https://github.com/cameron-bam/SudokuApp/archive/master.zip
 3.  Extract the zip to a directory of your choosing.
 4.  Open the node.js command prompt (windows) or a terminal (Mac).  Run "cd C:\path\to\directory\from\previous\step"
-5.  Run the command "npm start"
-6.  Open your browser and navigate to "http://localhost:3000/"
+5.  Run the command "npm install"
+6.  Run the command "npm start"
+7.  Open your browser and navigate to "http://localhost:3000/"
